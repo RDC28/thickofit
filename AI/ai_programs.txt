@@ -1,1163 +1,271 @@
-Practical no-1.A Write a program to implement depth first search
-algorithm.
-
-    graph1 = {
-             'A': set(['B', 'C']),
-             'B': set(['A', 'D', 'E']),
-             'C': set(['A', 'F']),
-             'D': set(['B']),
-             'E': set(['B', 'F']),
-             'F': set(['C', 'E'])
-            }
-    def dfs(graph, node, visited):
-        if node not in visited:
-            visited.append(node)
-            for n in graph[node]:
-                dfs(graph,n, visited)
-                return visited
-    visited = dfs(graph1,'A', [])
-    print(visited)
-
-    ['A', 'C']
-
-Practical no-1.B Write a program to implement breadth first search
-algorithm.
-
-    # sample graph implemented as a dictionary
-
-    graph = {'A': set(['B', 'C']),
-
-             'B': set(['A', 'D', 'E']),
-             'C': set(['A', 'F']),
-             'D': set(['B']),
-             'E': set(['B', 'F']),
-             'F': set(['C', 'E'])
-            }
-    #Implement Logic of BFS
-    def bfs(start):
-        queue = [start]
-        levels={}  #This Dict Keeps track of levels
-        levels[start]=0  #Depth of start node is 0
-        visited = set(start)
-        while queue:
-            node = queue.pop(0)
-            neighbours=graph[node]
-            for neighbor in neighbours:
-                if neighbor not in visited:
-                    queue.append(neighbor)
-                    visited.add(neighbor)
-                    levels[neighbor]= levels[node]+1
-        print(levels) #print graph level
-        return visited
-    print(str(bfs('A'))) #print graph node
-
-
-    #For Finding Breadth First Search Path
-    def bfs_paths(graph, start, goal):
-        queue = [(start, [start])]
-        while queue:
-            (vertex, path) = queue.pop(0)
-            for next in graph[vertex] - set(path):
-                if next == goal:
-                    yield path + [next]
-                else:
-                    queue.append((next, path + [next]))
-    result=list(bfs_paths(graph, 'A', 'F'))
-    print(result)# [['A', 'C', 'F'], ['A', 'B', 'E', 'F']]
-
-    #For finding shortest path
-    def shortest_path(graph, start, goal):
-        try:
-            return next(bfs_paths(graph, start, goal))
-        except StopIteration:
-            return None
-    result1=shortest_path(graph, 'A', 'F')
-    print(result1)# ['A', 'C', 'F']
-
-    {'A': 0, 'C': 1, 'B': 1, 'F': 2, 'E': 2, 'D': 2}
-    {'E', 'A', 'C', 'D', 'B', 'F'}
-    [['A', 'C', 'F'], ['A', 'B', 'E', 'F']]
-    ['A', 'C', 'F']
-
-Practical no-2.A Write a program to simulate 4-Queen / N-Queen problem.
-
-    class QueenChessBoard:
-        def __init__(self, size):
-            # board has dimensions size x size
-            self.size = size
-            # columns[r] is a number c if a queen is placed at row r and column c.
-            # columns[r] is out of range if no queen is place in row r.
-            # Thus after all queens are placed, they will be at positions
-            # (columns[0], 0), (columns[1], 1), ... (columns[size - 1], size - 1)
-            self.columns = []
-        def place_in_next_row(self, column):
-            self.columns.append(column)
-        def remove_in_current_row(self):
-            return self.columns.pop()
-        def is_this_column_safe_in_next_row(self, column):
-            # index of next row
-            row = len(self.columns)
-            # check column
-            for queen_column in self.columns:
-                if column == queen_column:
-                    return False
-            # check diagonal
-            for queen_row, queen_column in enumerate(self.columns):
-                if queen_column - queen_row == column - row:
-                    return False
-            # check other diagonal
-            for queen_row, queen_column in enumerate(self.columns):
-                if ((self.size - queen_column) - queen_row
-                    == (self.size - column) - row):
-                    return False
-            return True
-        def display(self):
-            for row in range(self.size):
-                for column in range(self.size):
-                    if column == self.columns[row]:
-                        print('Q', end=' ')
-                    else:
-                        print('.', end=' ')
-                print()
-    def solve_queen(size):
-
-        """Display a chessboard for each possible configuration of placing n
-    queens on an n x n chessboard and print the number of such
-    configurations."""
-        board = QueenChessBoard(size)
-        number_of_solutions = 0
-
-        row = 0
-        column = 0
-        # iterate over rows of board
-        while True:
-            # place queen in next row
-            while column < size:
-                if board.is_this_column_safe_in_next_row(column):
-                    board.place_in_next_row(column)
-                    row += 1
-                    column = 0
-                    break
-                else:
-                    column += 1
-
-            # if could not find column to place in or if board is full
-            if (column == size or row == size):
-                # if board is full, we have a solution
-                if row == size:
-                    board.display()
-                    print()
-                    number_of_solutions += 1
-                    # small optimization:
-                    # In a board that already has queens placed in all rows except
-                    # the last, we know there can only be at most one position in
-                    # the last row where a queen can be placed. In this case, there
-                    # is a valid position in the last row. Thus we can backtrack two
-                    # times to reach the second last row.
-                    board.remove_in_current_row()
-                    row -= 1
-                # now backtrack
-                try:
-                    prev_column = board.remove_in_current_row()
-                except IndexError:
-                    # all queens removed
-                    # thus no more possible configurations
-                    break
-                # try previous row again
-                row -= 1
-                # start checking at column = (1 + value of column in previous row)
-                column = 1 + prev_column
-        print('Number of solutions:', number_of_solutions)
-    n = int(input('Enter n: '))
-    solve_queen(n)
-
-    Enter n: 4
-    . Q . . 
-    . . . Q 
-    Q . . . 
-    . . Q . 
-
-    . . Q . 
-    Q . . . 
-    . . . Q 
-    . Q . . 
-
-    Number of solutions: 2
-
-Practical no-2.B Write a program to solve tower of Hanoi problem.
-
-    def moveTower(height,fromPole, toPole, withPole):
-        if height >= 1:
-            moveTower(height-1,fromPole,withPole,toPole)
-            moveDisk(fromPole,toPole)
-            moveTower(height-1,withPole,toPole,fromPole)
-    def moveDisk(fp,tp):
-        print("moving disk from",fp,"to",tp)
-    moveTower(3,"A","B","C")
-
-    moving disk from A to B
-    moving disk from A to C
-    moving disk from B to C
-    moving disk from A to B
-    moving disk from C to A
-    moving disk from C to B
-    moving disk from A to B
-
-PRACTICAL NO.-3.A Write a program to implement alpha beta search.
-
-    tree = [[[5, 1, 2], [8, -8, -9]], [[9, 4, 5], [-3, 4, 3]]]
-    root = 0
-    pruned = 0
-
-    def children(branch, depth, alpha, beta):
-        global tree
-        global root
-        global pruned
-        i = 0
-        for child in branch:
-            if type(child) is list:
-                (nalpha, nbeta) = children(child, depth + 1, alpha, beta)
-                if depth % 2 == 1:
-                    beta = nalpha if nalpha < beta else beta
-                else:
-                    alpha = nbeta if nbeta > alpha else alpha
-                branch[i] = alpha if depth % 2 == 0 else beta
-                i += 1
-            else:
-                if depth % 2 == 0 and alpha < child:
-                    alpha = child
-                if depth % 2 == 1 and beta > child:
-                    beta = child
-                if alpha >= beta:
-                    pruned += 1
-                    break
-        if depth == root:
-            tree = alpha if root == 0 else beta
-        return (alpha, beta)
-
-    def alphabeta(in_tree=tree, start=root, upper=-15, lower=15):
-        global tree
-        global pruned
-        global root
-
-        (alpha, beta) = children(tree, start, upper, lower)
-
-        if __name__ == "__main__":
-            print ("(alpha, beta): ", alpha, beta)
-            print ("Result: ", tree)
-            print ("Times pruned: ", pruned)
-
-        return (alpha, beta, tree, pruned)
-
-    if __name__ == "__main__":
-        alphabeta(None)
-
-    (alpha, beta):  5 15
-    Result:  5
-    Times pruned:  1
-
-PRACTICAL NO.-3.B Write a program for Hill climbing problem.
-
-    import math
-
-    increment = 0.1
-    startingPoint = [1, 1]
-    point1 = [1,5]
-    point2 = [6,4]
-    point3 = [5,2]
-    point4 = [2,1]
-
-    def distance(x1, y1, x2, y2):
-        dist = math.pow(x2-x1, 2) + math.pow(y2-y1, 2)
-        return dist
-
-    def sumOfDistances(x1, y1, px1, py1, px2, py2, px3, py3, px4, py4):
-        d1 = distance(x1, y1, px1, py1)
-        d2 = distance(x1, y1, px2, py2)
-        d3 = distance(x1, y1, px3, py3)
-        d4 = distance(x1, y1, px4, py4)
-
-        return d1 + d2 + d3 + d4
-    def newDistance(x1, y1, point1, point2, point3, point4):
-        d1 = [x1, y1]
-        d1temp = sumOfDistances(x1, y1, point1[0],point1[1], point2[0],point2[1],
-                                    point3[0],point3[1], point4[0],point4[1] )
-        d1.append(d1temp)
-        return d1
-
-    minDistance = sumOfDistances(startingPoint[0], startingPoint[1],
-    point1[0],point1[1], point2[0],point2[1],
-                                    point3[0],point3[1], point4[0],point4[1] )
-    flag = True
-
-    def newPoints(minimum, d1, d2, d3, d4):
-        if d1[2] == minimum:
-            return [d1[0], d1[1]]
-        elif d2[2] == minimum:
-            return [d2[0], d2[1]]
-        elif d3[2] == minimum:
-            return [d3[0], d3[1]]
-        elif d4[2] == minimum:
-            return [d4[0], d4[1]]
-
-    i = 1
-    while flag:
-        d1 = newDistance(startingPoint[0]+increment, startingPoint[1], point1, point2,
-    point3, point4)
-        d2 = newDistance(startingPoint[0]-increment, startingPoint[1], point1, point2,
-    point3, point4)
-        d3 = newDistance(startingPoint[0], startingPoint[1]+increment, point1, point2,
-    point3, point4)
-        d4 = newDistance(startingPoint[0], startingPoint[1]-increment, point1, point2,
-    point3, point4)
-        print (i,' ', round(startingPoint[0], 2), round(startingPoint[1], 2))
-        minimum = min(d1[2], d2[2], d3[2], d4[2])
-        if minimum < minDistance:
-            startingPoint = newPoints(minimum, d1, d2, d3, d4)
-            minDistance = minimum
-            #print i,' ', round(startingPoint[0], 2), round(startingPoint[1], 2)
-            i+=1
-        else:
-            flag = False
-
-    1   1 1
-    2   1.1 1
-    3   1.2 1
-    4   1.3 1
-    5   1.4 1
-    6   1.5 1
-    7   1.6 1
-    8   1.6 1.1
-    9   1.7 1.1
-    10   1.7 1.2
-    11   1.7 1.3
-    12   1.8 1.3
-    13   1.8 1.4
-    14   1.9 1.4
-    15   2.0 1.4
-    16   2.0 1.5
-    17   2.1 1.5
-    18   2.1 1.6
-    19   2.2 1.6
-    20   2.2 1.7
-    21   2.3 1.7
-    22   2.3 1.8
-    23   2.3 1.9
-    24   2.4 1.9
-    25   2.5 1.9
-    26   2.5 2.0
-    27   2.6 2.0
-    28   2.6 2.1
-    29   2.7 2.1
-    30   2.7 2.2
-    31   2.8 2.2
-    32   2.8 2.3
-    33   2.9 2.3
-    34   2.9 2.4
-    35   3.0 2.4
-    36   3.0 2.5
-    37   3.1 2.5
-    38   3.1 2.6
-    39   3.2 2.6
-    40   3.2 2.7
-    41   3.2 2.8
-    42   3.3 2.8
-    43   3.4 2.8
-    44   3.4 2.9
-    45   3.5 2.9
-    46   3.5 3.0
-
-Practical no-4.A Write a program to implement A* algorithm.
-
-    # Install simpleai in Colab (Run this once)
-    #!pip install simpleai
-    # Import necessary libraries
-    from simpleai.search import SearchProblem, astar
-    # Define the goal state
-    GOAL = 'HELLO WORLD'
-    # Define the search problem
-    class HelloProblem(SearchProblem):
-        def actions(self, state):
-            if len(state) < len(GOAL):
-                return list(' ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-            else:
-                return []
-        def result(self, state, action):
-            return state + action
-        def is_goal(self, state):
-            return state == GOAL
-        def heuristic(self, state):
-            # how far are we from the goal?
-            wrong = sum([1 if state[i] != GOAL[i] else 0 for i in range(len(state))])
-            missing = len(GOAL) - len(state)
-            return wrong + missing
-    # Create an instance of the problem with the initial state as an empty string
-    problem = HelloProblem(initial_state='')
-    # Solve the problem using the A* algorithm
-    result = astar(problem)
-    # Print the final state
-    print("Final State:", result.state)
-    # Print the path with line breaks
-    print("\nPath to Solution:")
-    for action, state in result.path():
-        print(f"Action: {action} -> State: {state}")
-
-    Final State: HELLO WORLD
-
-    Path to Solution:
-    Action: None -> State: 
-    Action: H -> State: H
-    Action: E -> State: HE
-    Action: L -> State: HEL
-    Action: L -> State: HELL
-    Action: O -> State: HELLO
-    Action:   -> State: HELLO 
-    Action: W -> State: HELLO W
-    Action: O -> State: HELLO WO
-    Action: R -> State: HELLO WOR
-    Action: L -> State: HELLO WORL
-    Action: D -> State: HELLO WORLD
-
-Practical no-4.B
-
-Practical no-5.A Write a program to solve water jug problem.
-
-    # 3 water jugs capacity -> (x,y,z) where x>y>z
-    # initial state (12,0,0)
-    # final state (6,6,0)
-
-    capacity = (12,8,5)
-    # Maximum capacities of 3 jugs -> x,y,z
-    x = capacity[0]
-    y = capacity[1]
-    z = capacity[2]
-
-    # to mark visited states
-    memory = {}
-
-    # store solution path
-    ans = []
-    def get_all_states(state):
-      # Let the 3 jugs be called a,b,c
-      a = state[0]
-      b = state[1]
-      c = state[2]
-
-      if(a==6 and b==6):
-          ans.append(state)
-          return True
-
-      # if current state is already visited earlier
-      if((a,b,c) in memory):
-          return False
-
-      memory[(a,b,c)] = 1
-
-      #empty jug a
-      if(a>0):
-          #empty a into b
-          if(a+b<=y):
-              if( get_all_states((0,a+b,c)) ):
-                  ans.append(state)
-                  return True
-          else:
-              if( get_all_states((a-(y-b), y, c)) ):
-                  ans.append(state)
-                  return True
-          #empty a into c
-          if(a+c<=z):
-              if( get_all_states((0,b,a+c)) ):
-                  ans.append(state)
-                  return True
-          else:
-              if( get_all_states((a-(z-c), b, z)) ):
-                  ans.append(state)
-                  return True
-
-      #empty jug b
-      if(b>0):
-          #empty b into a
-          if(a+b<=x):
-              if( get_all_states((a+b, 0, c)) ):
-                  ans.append(state)
-                  return True
-          else:
-              if( get_all_states((x, b-(x-a), c)) ):
-                  ans.append(state)
-                  return True
-          #empty b into c
-          if(b+c<=z):
-              if( get_all_states((a, 0, b+c)) ):
-                  ans.append(state)
-                  return True
-          else:
-              if( get_all_states((a, b-(z-c), z)) ):
-                  ans.append(state)
-                  return True
-
-      #empty jug c
-      if(c>0):
-          #empty c into a
-          if(a+c<=x):
-              if( get_all_states((a+c, b, 0)) ):
-                  ans.append(state)
-                  return True
-          else:
-              if( get_all_states((x, b, c-(x-a))) ):
-                  ans.append(state)
-                  return True
-          #empty c into b
-          if(b+c<=y):
-              if( get_all_states((a, b+c, 0)) ):
-                  ans.append(state)
-                  return True
-          else:
-              if( get_all_states((a, y, c-(y-b))) ):
-                  ans.append(state)
-                  return True
-
-      return False
-    initial_state = (12,0,0)
-    print("Starting work...\n")
-    get_all_states(initial_state)
-    ans.reverse()
-    for i in ans:
-      print(i)
-
-    Starting work...
-
-    (12, 0, 0)
-    (4, 8, 0)
-    (0, 8, 4)
-    (8, 0, 4)
-    (8, 4, 0)
-    (3, 4, 5)
-    (3, 8, 1)
-    (11, 0, 1)
-    (11, 1, 0)
-    (6, 1, 5)
-    (6, 6, 0)
-
-Practical no-5.B Design the simulation of tic – tac – toe game using
-min-max algorithm.
-
-    import os
-    import time
-
-    board = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
-    player = 1
-
-    ########win Flags##########
-    Win = 1
-    Draw = -1
-    Running = 0
-    Stop = 1
-    ###########################
-    Game = Running
-    Mark = 'X'
-
-    #This Function Draws Game Board
-    def DrawBoard():
-        print(" %c | %c | %c " % (board[1],board[2],board[3]))
-        print("___|___|___")
-        print(" %c | %c | %c " % (board[4],board[5],board[6]))
-        print("___|___|___")
-        print(" %c | %c | %c " % (board[7],board[8],board[9]))
-        print("   |   |   ")
-
-    #This Function Checks position is empty or not
-    def CheckPosition(x):
-        if(board[x] == ' '):
-            return True
-        else:
-            return False
-
-    #This Function Checks player has won or not
-    def CheckWin():
-        global Game
-        #Horizontal winning condition
-        if(board[1] == board[2] and board[2] == board[3] and board[1] != ' '):
-            Game = Win
-        elif(board[4] == board[5] and board[5] == board[6] and board[4] != ' '):
-            Game = Win
-        elif(board[7] == board[8] and board[8] == board[9] and board[7] != ' '):
-            Game = Win
-        #Vertical Winning Condition
-        elif(board[1] == board[4] and board[4] == board[7] and board[1] != ' '):
-            Game = Win
-        elif(board[2] == board[5] and board[5] == board[8] and board[2] != ' '):
-            Game = Win
-        elif(board[3] == board[6] and board[6] == board[9] and board[3] != ' '):
-            Game=Win
-        #Diagonal Winning Condition
-        elif(board[1] == board[5] and board[5] == board[9] and board[5] != ' '):
-            Game = Win
-        elif(board[3] == board[5] and board[5] == board[7] and board[5] != ' '):
-            Game=Win
-        #Match Tie or Draw Condition
-        elif(board[1]!=' ' and board[2]!=' ' and board[3]!=' ' and board[4]!=' ' and
-    board[5]!=' ' and board[6]!=' ' and board[7]!=' ' and board[8]!=' ' and board[9]!=' '):
-            Game=Draw
-        else:
-            Game=Running
-
-    print("Tic-Tac-Toe Game")
-    print("Player 1 [X] --- Player 2 [O]\n")
-    print()
-    print()
-    print("Please Wait...")
-    time.sleep(1)
-    while(Game == Running):
-        os.system('cls')
-        DrawBoard()
-        if(player % 2 != 0):
-            print("Player 1's chance")
-            Mark = 'X'
-        else:
-            print("Player 2's chance")
-            Mark = 'O'
-        choice = int(input("Enter the position between [1-9] where you want to mark: "))
-        if(CheckPosition(choice)):
-            board[choice] = Mark
-            player += 1
-            CheckWin()
-    os.system('cls')
-    DrawBoard()
-    if(Game == Draw):
-        print("Game Draw")
-    elif(Game == Win):
-        player -= 1
-        if(player % 2 != 0):
-            print("Player 1 Won")
-        else:
-            print("Player 2 Won")
-
-    Tic-Tac-Toe Game
-    Player 1 [X] --- Player 2 [O]
-
-
-
-    Please Wait...
-       |   |   
-    ___|___|___
-       |   |   
-    ___|___|___
-       |   |   
-       |   |   
-    Player 1's chance
-    Enter the position between [1-9] where you want to mark: 1
-     X |   |   
-    ___|___|___
-       |   |   
-    ___|___|___
-       |   |   
-       |   |   
-    Player 2's chance
-    Enter the position between [1-9] where you want to mark: 7
-     X |   |   
-    ___|___|___
-       |   |   
-    ___|___|___
-     O |   |   
-       |   |   
-    Player 1's chance
-    Enter the position between [1-9] where you want to mark: 3
-     X |   | X 
-    ___|___|___
-       |   |   
-    ___|___|___
-     O |   |   
-       |   |   
-    Player 2's chance
-    Enter the position between [1-9] where you want to mark: 2
-     X | O | X 
-    ___|___|___
-       |   |   
-    ___|___|___
-     O |   |   
-       |   |   
-    Player 1's chance
-    Enter the position between [1-9] where you want to mark: 9
-     X | O | X 
-    ___|___|___
-       |   |   
-    ___|___|___
-     O |   | X 
-       |   |   
-    Player 2's chance
-    Enter the position between [1-9] where you want to mark: 5
-     X | O | X 
-    ___|___|___
-       | O |   
-    ___|___|___
-     O |   | X 
-       |   |   
-    Player 1's chance
-    Enter the position between [1-9] where you want to mark: 6
-     X | O | X 
-    ___|___|___
-       | O | X 
-    ___|___|___
-     O |   | X 
-       |   |   
-    Player 1 Won
-
-PRACTICAL No.-6.A Write a program to solve Missionaries and Cannibals
-problem.
-
-    import math
-
-    class State():
-        def __init__(self, cannibalLeft, missionaryLeft, boat, cannibalRight, missionaryRight):
-            self.cannibalLeft = cannibalLeft
-            self.missionaryLeft = missionaryLeft
-            self.boat = boat
-            self.cannibalRight = cannibalRight
-            self.missionaryRight = missionaryRight
-            self.parent = None
-
-        def is_goal(self):
-            return self.cannibalLeft == 0 and self.missionaryLeft == 0
-
-        def is_valid(self):
-            return (self.missionaryLeft >= 0 and self.missionaryRight >= 0 and
-                    self.cannibalLeft >= 0 and self.cannibalRight >= 0 and
-                    (self.missionaryLeft == 0 or self.missionaryLeft >= self.cannibalLeft) and
-                    (self.missionaryRight == 0 or self.missionaryRight >= self.cannibalRight))
-
-        def __eq__(self, other):
-            return (self.cannibalLeft == other.cannibalLeft and
-                    self.missionaryLeft == other.missionaryLeft and
-                    self.boat == other.boat and
-                    self.cannibalRight == other.cannibalRight and
-                    self.missionaryRight == other.missionaryRight)
-
-        def __hash__(self):
-            return hash((self.cannibalLeft, self.missionaryLeft, self.boat, self.cannibalRight, self.missionaryRight))
-
-    def successors(cur_state):
-        children = []
-        if cur_state.boat == 'left':
-            new_state = State(cur_state.cannibalLeft, cur_state.missionaryLeft - 2, 'right',
-                              cur_state.cannibalRight, cur_state.missionaryRight + 2)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-            new_state = State(cur_state.cannibalLeft - 2, cur_state.missionaryLeft, 'right',
-                              cur_state.cannibalRight + 2, cur_state.missionaryRight)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-            new_state = State(cur_state.cannibalLeft - 1, cur_state.missionaryLeft - 1, 'right',
-                              cur_state.cannibalRight + 1, cur_state.missionaryRight + 1)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-            new_state = State(cur_state.cannibalLeft, cur_state.missionaryLeft - 1, 'right',
-                              cur_state.cannibalRight, cur_state.missionaryRight + 1)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-            new_state = State(cur_state.cannibalLeft - 1, cur_state.missionaryLeft, 'right',
-                              cur_state.cannibalRight + 1, cur_state.missionaryRight)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-        else:
-            new_state = State(cur_state.cannibalLeft, cur_state.missionaryLeft + 2, 'left',
-                              cur_state.cannibalRight, cur_state.missionaryRight - 2)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-            new_state = State(cur_state.cannibalLeft + 2, cur_state.missionaryLeft, 'left',
-                              cur_state.cannibalRight - 2, cur_state.missionaryRight)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-            new_state = State(cur_state.cannibalLeft + 1, cur_state.missionaryLeft + 1, 'left',
-                              cur_state.cannibalRight - 1, cur_state.missionaryRight - 1)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-            new_state = State(cur_state.cannibalLeft, cur_state.missionaryLeft + 1, 'left',
-                              cur_state.cannibalRight, cur_state.missionaryRight - 1)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-            new_state = State(cur_state.cannibalLeft + 1, cur_state.missionaryLeft, 'left',
-                              cur_state.cannibalRight - 1, cur_state.missionaryRight)
-            if new_state.is_valid():
-                new_state.parent = cur_state
-                children.append(new_state)
-        return children
-
-    def breadth_first_search():
-        initial_state = State(3, 3, 'left', 0, 0)
-        if initial_state.is_goal():
-            return initial_state
-        frontier = []
-        explored = set()
-        frontier.append(initial_state)
-        while frontier:
-            state = frontier.pop(0)
-            if state.is_goal():
-                return state
-            explored.add(state)
-            children = successors(state)
-            for child in children:
-                if (child not in explored) or (child not in frontier):
-                    frontier.append(child)
-        return None
-
-    def print_solution(solution):
-        path = []
-        path.append(solution)
-        parent = solution.parent
-        while parent:
-            path.append(parent)
-            parent = parent.parent
-        for t in range(len(path)):
-            state = path[len(path) - t - 1]
-            print("(" + str(state.cannibalLeft) + "," + str(state.missionaryLeft) + "," +
-                  state.boat + "," + str(state.cannibalRight) + "," + str(state.missionaryRight) + ")")
-
-    def main():
-        solution = breadth_first_search()
-        print("Missionaries and Cannibals solution:")
-        print("(cannibalLeft,missionaryLeft,boat,cannibalRight,missionaryRight)")
-        print_solution(solution)
-
-    if __name__ == "__main__":
-        main()
-
-    Missionaries and Cannibals solution:
-    (cannibalLeft,missionaryLeft,boat,cannibalRight,missionaryRight)
-    (3,3,left,0,0)
-    (1,3,right,2,0)
-    (2,3,left,1,0)
-    (0,3,right,3,0)
-    (1,3,left,2,0)
-    (1,1,right,2,2)
-    (2,2,left,1,1)
-    (2,0,right,1,3)
-    (3,0,left,0,3)
-    (1,0,right,2,3)
-    (1,1,left,2,2)
-    (0,0,right,3,3)
-
-PRACTICAL No.-6.B Design an application to simulate number puzzle
-problem.
-
-    '''
-    8 puzzle problem, a smaller version of the fifteen puzzle:
-    States are defined as string representations of the pieces on the puzzle.
-    Actions denote what piece will be moved to the empty space.
-    States must allways be inmutable. We will use strings, but internally most of
-    the time we will convert those strings to lists, which are easier to handle.
-    For example, the state (string):
-    '1-2-3
-     4-5-6
-     7-8-e'
-    will become (in lists):
-    [['1', '2', '3'],
-     ['4', '5', '6'],
-     ['7', '8', 'e']]
-
-    '''
-
-
-    GOAL = '''1-2-3
-    4-5-6
-    7-8-e'''
-
-    INITIAL = '''4-1-2
-    7-e-3
-    8-5-6'''
-
-    def list_to_string(list_):
-        return '\n'.join(['-'.join(row) for row in list_])
-
-    def string_to_list(string_):
-        return [row.split('-') for row in string_.split('\n')]
-
-    def find_location(rows, element_to_find):
-        for ir, row in enumerate(rows):
-            for ic, element in enumerate(row):
-                if element == element_to_find:
-                    return ir, ic
-
-    goal_positions = {}
-    rows_goal = string_to_list(GOAL)
-    for number in '12345678e':
-        goal_positions[number] = find_location(rows_goal, number)
-
-    class EigthPuzzleProblem:
-        def __init__(self, initial):
-            self.initial = initial
-
-        def actions(self, state):
-            rows = string_to_list(state)
-            row_e, col_e = find_location(rows, 'e')
-
-            actions = []
-            if row_e > 0:
-                actions.append(rows[row_e - 1][col_e])
-            if row_e < 2:
-                actions.append(rows[row_e + 1][col_e])
-            if col_e > 0:
-                actions.append(rows[row_e][col_e - 1])
-            if col_e < 2:
-                actions.append(rows[row_e][col_e + 1])
-
-            return actions
-
-        def result(self, state, action):
-            rows = string_to_list(state)
-            row_e, col_e = find_location(rows, 'e')
-            row_n, col_n = find_location(rows, action)
-
-            rows[row_e][col_e], rows[row_n][col_n] = rows[row_n][col_n], rows[row_e][col_e]
-
-            return list_to_string(rows)
-
-        def is_goal(self, state):
-            return state == GOAL
-
-        def cost(self, state1, action, state2):
-            return 1
-
-        def heuristic(self, state):
-            rows = string_to_list(state)
-            distance = 0
-            for number in '12345678e':
-                row_n, col_n = find_location(rows, number)
-                row_n_goal, col_n_goal = goal_positions[number]
-                distance += abs(row_n - row_n_goal) + abs(col_n - col_n_goal)
-            return distance
-
-    def astar(problem):
-        from heapq import heappop, heappush
-        explored = set()
-        frontier = [(0 + problem.heuristic(problem.initial), 0, problem.initial, None)]
-        while frontier:
-            estimated_total, cost_so_far, state, path = heappop(frontier)
-            if problem.is_goal(state):
-                return Path(cost_so_far, path, state)
-            if state not in explored:
-                explored.add(state)
-                for action in problem.actions(state):
-                    next_state = problem.result(state, action)
-                    new_cost = cost_so_far + problem.cost(state, action, next_state)
-                    heappush(frontier, (new_cost + problem.heuristic(next_state), new_cost, next_state, (action, state, path)))
-
-    class Path:
-        def __init__(self, cost, path, state):
-            self.cost = cost
-            self.path = self._unwind_path(path)
-            self.state = state
-
-        def _unwind_path(self, end):
-            result = []
-            while end:
-                action, state, end = end
-                result.append((action, state))
-            result.reverse()
-            return result
-
-    result = astar(EigthPuzzleProblem(INITIAL))
-    for action, state in result.path:
-        print('Move number', action)
-        print(state)
-
-    Move number 5
-    4-1-2
-    7-e-3
-    8-5-6
-    Move number 8
-    4-1-2
-    7-5-3
-    8-e-6
-    Move number 7
-    4-1-2
-    7-5-3
-    e-8-6
-    Move number 4
-    4-1-2
-    e-5-3
-    7-8-6
-    Move number 1
-    e-1-2
-    4-5-3
-    7-8-6
-    Move number 2
-    1-e-2
-    4-5-3
-    7-8-6
-    Move number 3
-    1-2-e
-    4-5-3
-    7-8-6
-    Move number 6
-    1-2-3
-    4-5-e
-    7-8-6
-
-PRACTICAL No.-7.A Write a program to shuffle Deck of cards.
-
-    # first let's import random procedures since we will be shuffling
-    import random
-
-    # next, let's start building list holders so we can place our cards in there:
-    cardfaces = []
-    suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-    royals = ["J", "Q", "K", "A"]
-    deck = []
-
-    # now, let's start using loops to add our content:
-    for i in range(2, 11):
-        cardfaces.append(str(i))  # this adds numbers 2-10 and converts them to string
-
-    for j in range(4):
-        cardfaces.append(royals[j])  # this will add the royal faces to the cardbase
-
-    for k in range(4):
-        for l in range(13):
-            card = (cardfaces[l] + " of " + suits[k])
-            # this makes each card, cycling through suits, but first through faces
-            deck.append(card)
-            # this adds the information to the "full deck" we want to make
-
-    # now let's shuffle our deck!
-    random.shuffle(deck)
-
-    # now let's see the cards!
-    for m in range(52):
-        print(deck[m])
-
-    K of Spades
-    10 of Diamonds
-    8 of Spades
-    4 of Spades
-    6 of Diamonds
-    3 of Spades
-    8 of Clubs
-    9 of Diamonds
-    2 of Hearts
-    A of Diamonds
-    2 of Diamonds
-    Q of Diamonds
-    J of Diamonds
-    6 of Hearts
-    7 of Hearts
-    6 of Spades
-    K of Clubs
-    7 of Diamonds
-    9 of Clubs
-    J of Hearts
-    5 of Hearts
-    6 of Clubs
-    5 of Diamonds
-    A of Clubs
-    7 of Spades
-    J of Clubs
-    10 of Hearts
-    7 of Clubs
-    4 of Clubs
-    5 of Clubs
-    K of Diamonds
-    A of Spades
-    9 of Spades
-    10 of Spades
-    J of Spades
-    3 of Clubs
-    3 of Hearts
-    10 of Clubs
-    K of Hearts
-    2 of Spades
-    5 of Spades
-    8 of Diamonds
-    Q of Hearts
-    4 of Diamonds
-    A of Hearts
-    9 of Hearts
-    3 of Diamonds
-    2 of Clubs
-    4 of Hearts
-    Q of Spades
-    Q of Clubs
-    8 of Hearts
-
-    # Python program to shuffle a deck of card using the module random and
-    #draw 5 cards
-    # import modules
-    import itertools, random
-    # make a deck of cards
-    deck = list(itertools.product(range(1,14),['Spade','Heart','Diamond','Club']))
-    # shuffle the cards
-    random.shuffle(deck)
-    # draw five cards
-    print("You got:")
-    for i in range(5):
-       print(deck[i][0], "of", deck[i][1])
-
-    You got:
-    7 of Diamond
-    11 of Spade
-    12 of Club
-    6 of Diamond
-    11 of Heart
-
-PRACTICAL No.-8 Solve the block of World problem.
-
-    from itertools import product
-
-    variables = ('WA', 'NT', 'SA', 'Q', 'NSW', 'V', 'T')
-    domains = dict((v, ['red', 'green', 'blue']) for v in variables)
-
-    def const_different(var1, var2, value1, value2):
-        return value1 != value2  # Ensure the values are different
-
-    constraints = {
-        'WA': ['NT', 'SA'],
-        'NT': ['WA', 'SA', 'Q'],
-        'SA': ['WA', 'NT', 'Q', 'NSW', 'V'],
-        'Q': ['NT', 'SA', 'NSW'],
-        'NSW': ['SA', 'Q', 'V'],
-        'V': ['SA', 'NSW'],
-        'T': []
-    }
-
-    def is_valid(assignment):
-        for var in assignment:
-            for neighbor in constraints[var]:
-                if neighbor in assignment and not const_different(var, neighbor, assignment[var], assignment[neighbor]):
-                    return False
-        return True
-
-    def backtrack(assignment):
-        if len(assignment) == len(variables):
-            return assignment
-
-        unassigned = [v for v in variables if v not in assignment]
-        var = unassigned[0]  # Simple heuristic: pick the first unassigned variable
-
-        for value in domains[var]:
-            assignment[var] = value
-            if is_valid(assignment):
-                result = backtrack(assignment)
-                if result:
-                    return result
-            del assignment[var]  # Remove the assignment
-
-        return None
-
-    # Perform backtracking
-    solution = backtrack({})
-    if solution:
-        print("Solution found:", solution)
-    else:
-        print("No solution exists")
-
-    Solution found: {'WA': 'red', 'NT': 'green', 'SA': 'blue', 'Q': 'red', 'NSW': 'green', 'V': 'red', 'T': 'red'}
-
-END
+Certainly! I'll expand each practical a bit more, detailing the aim, requirements, procedures, code examples, and explanations so you have a thorough understanding to write your practicals for the exam.
+
+---
+
+### **Practical 3: Displaying Different LED Patterns with Raspberry Pi**
+
+**Aim**: To create and display various LED patterns using a Raspberry Pi.
+
+**Hardware Requirements**:
+- Breadboard
+- LEDs (at least 4)
+- Resistors (220Ω or 330Ω recommended)
+- Jumper Wires
+- Raspberry Pi (any model with GPIO support)
+- Keyboard and Mouse
+- HDMI Cable and Monitor
+- Power Supply
+
+**Procedure**:
+1. **Set Up the Hardware**:
+   - Place 4 LEDs on the breadboard. Ensure you identify the longer terminal (anode, positive) and shorter terminal (cathode, negative) of each LED.
+   - Connect each anode to separate GPIO pins (e.g., Pins 7, 29, 31, 33) on the Raspberry Pi using jumper wires.
+   - Attach resistors between the cathodes of the LEDs and the ground rail on the breadboard. This prevents the LEDs from burning out.
+   - Connect the ground rail to a ground pin on the Raspberry Pi (e.g., Pin 9).
+
+2. **Write the Python Code**:
+   - Use the `RPi.GPIO` library to control the LEDs. The code defines the pattern and duration for each LED.
+   - Example code:
+     ```python
+     import RPi.GPIO as GPIO
+     import time
+
+     # Set up the board and GPIO pins
+     GPIO.setmode(GPIO.BOARD)
+     GPIO.setwarnings(False)
+
+     # Define the LED pins
+     led_pins = [7, 29, 31, 33]
+     for pin in led_pins:
+         GPIO.setup(pin, GPIO.OUT)
+
+     try:
+         while True:
+             # Turn on all LEDs sequentially
+             for pin in led_pins:
+                 GPIO.output(pin, True)
+                 time.sleep(0.5)
+             # Turn off all LEDs sequentially
+             for pin in led_pins:
+                 GPIO.output(pin, False)
+                 time.sleep(0.5)
+     except KeyboardInterrupt:
+         print("Program stopped")
+     finally:
+         GPIO.cleanup()
+     ```
+
+3. **Run the Code**:
+   - Save the file as `led_pattern.py` and run it using the terminal:
+     ```
+     python3 led_pattern.py
+     ```
+   - Observe the LEDs turning on and off in a sequence.
+
+**Explanation**:
+- This code lights up LEDs one by one, waits briefly, and then turns them off in reverse order, creating a simple pattern.
+
+**Conclusion**:
+This practical demonstrates how the Raspberry Pi’s GPIO pins can be used to create interactive LED patterns, showcasing basic electronics control and programming.
+
+---
+
+### **Practical 5: Click Image and Video Using Raspberry Pi**
+
+**Aim**: To use the Pi Camera to capture still images and videos through a Raspberry Pi.
+
+**Hardware Requirements**:
+- Pi Camera Module
+- Raspberry Pi
+- Keyboard, Mouse, and HDMI Cable
+- Monitor for Display
+- Power Supply
+
+**Procedure**:
+1. **Connect the Pi Camera**:
+   - Attach the Pi Camera module to the CSI port on the Raspberry Pi. Ensure that the camera ribbon cable is inserted correctly.
+
+2. **Enable the Camera Interface**:
+   - Open the terminal and enter:
+     ```
+     sudo raspi-config
+     ```
+   - Navigate to **Interfacing Options** → **Camera** → **Enable**.
+
+3. **Write the Code for Capturing an Image**:
+   - Use the `picamera` library in Python to access the camera.
+     ```python
+     from picamera import PiCamera
+     import time
+
+     camera = PiCamera()
+     camera.resolution = (1280, 720)
+     camera.start_preview()
+     time.sleep(5)  # Wait for the camera to adjust settings
+     camera.capture('/home/pi/Desktop/photo.jpg')
+     camera.stop_preview()
+     print("Image captured and saved.")
+     ```
+
+4. **Write the Code for Recording Video**:
+   ```python
+   from picamera import PiCamera
+   import time
+
+   camera = PiCamera()
+   camera.start_preview()
+   camera.start_recording('/home/pi/Desktop/video.h264')
+   time.sleep(10)  # Record for 10 seconds
+   camera.stop_recording()
+   camera.stop_preview()
+   print("Video recorded and saved.")
+   ```
+
+5. **Run the Code**:
+   - Save the code and execute it through the terminal. The image will be saved to the specified path.
+
+**Explanation**:
+- The Pi Camera captures and saves images and videos, demonstrating basic multimedia capabilities of the Raspberry Pi.
+
+**Conclusion**:
+This practical shows how to integrate and program a Pi Camera, effectively capturing and storing multimedia using Python.
+
+---
+
+### **Practical 6: Displaying Time Over 4-Digit 7-Segment Display Using Raspberry Pi**
+
+**Aim**: To display the current time using a 4-digit 7-segment display connected to the Raspberry Pi.
+
+**Hardware Requirements**:
+- 4-Digit 7-Segment Display Module
+- Jumper Wires
+- Raspberry Pi
+- HDMI Cable and Monitor
+- Power Supply
+
+**Procedure**:
+1. **Connect the 7-Segment Display**:
+   - Connect the VCC pin of the display to Pin 2 (5V) and the GND pin to Pin 6 (Ground) of the Raspberry Pi.
+   - Connect the DIO pin of the display to Pin 38 and the CLK pin to Pin 40.
+
+2. **Download the Required Files**:
+   - Access the 7-segment display Python files from [GitHub](https://github.com/timwaizenegger/raspberrypi-examples/tree/master/actor-led-7segment-4numbers).
+   - Extract and navigate to the folder containing the `clock.py` file.
+
+3. **Run the Program**:
+   - Open the terminal and navigate to the directory where the file is located:
+     ```
+     cd /path/to/your/file
+     ```
+   - Execute the following command:
+     ```
+     sudo python clock.py
+     ```
+   - The current time should appear on the display.
+
+**Explanation**:
+- This code utilizes the GPIO pins to interact with the 7-segment display, showing the real-time clock.
+
+**Conclusion**:
+This practical demonstrates how the Raspberry Pi can control a 7-segment display to show dynamic, real-time data.
+
+---
+
+### **Practical 7: Interfacing Raspberry Pi with RFID**
+
+**Aim**: To read and write data using RFID tags and the Raspberry Pi.
+
+**Hardware Requirements**:
+- RFID Reader and RFID Tags
+- Jumper Wires
+- Raspberry Pi
+- Monitor, HDMI Cable, Keyboard, and Mouse
+- Power Supply
+
+**Procedure**:
+1. **Connect the RFID Module**:
+   - Connect the VCC, GND, and data pins of the RFID reader to the appropriate GPIO pins on the Raspberry Pi (VCC to 5V, GND to GND, and data pins to GPIO pins).
+
+2. **Install the `mfrc522` Library**:
+   - Open the terminal and run:
+     ```
+     sudo pip3 install mfrc522
+     ```
+
+3. **Write the Code for Reading and Writing**:
+   - **Reading Code**:
+     ```python
+     from mfrc522 import SimpleMFRC522
+     import RPi.GPIO as GPIO
+
+     reader = SimpleMFRC522()
+
+     try:
+         print("Place your card:")
+         id, text = reader.read()
+         print(f"ID: {id}")
+         print(f"Text: {text}")
+     finally:
+         GPIO.cleanup()
+     ```
+   - **Writing Code**:
+     ```python
+     from mfrc522 import SimpleMFRC522
+     import RPi.GPIO as GPIO
+
+     reader = SimpleMFRC522()
+
+     try:
+         text = input("Enter data to write: ")
+         print("Place your tag:")
+         reader.write(text)
+         print("Data written")
+     finally:
+         GPIO.cleanup()
+     ```
+
+4. **Test the Program**:
+   - Run the code using `sudo python3 read.py` or `sudo python3 write.py` to read or write data on the RFID tag.
+
+**Conclusion**:
+The Raspberry Pi successfully interacts with RFID modules, illustrating how to implement data reading and writing functionalities in IoT projects.
+
+---
+
+### **Practical 8: Raspberry Pi GPS Module Interfacing**
+
+**Aim**: To integrate a GPS module with a Raspberry Pi to obtain and display location data.
+
+**Hardware Requirements**:
+- GPS Module
+- Jumper Wires
+- Raspberry Pi
+- Monitor, HDMI Cable, Keyboard, and Mouse
+- Power Supply
+
+**Procedure**:
+1. **Connect the GPS Module**:
+   - Use jumper wires to connect the VCC, GND, RX, and TX pins of the GPS module to the Raspberry Pi (VCC to Pin 4, GND to Pin 6, RX to Pin 8, TX to Pin 10).
+
+2. **Install GPS Software**:
+   - In the terminal, run:
+     ```
+     sudo apt-get install gpsd gpsd-clients
+     ```
+
+3. **Run the GPS Software**:
+   - Execute:
+     ```
+     sudo gpsd /dev/serial0 -F /var/run/gpsd.sock
+     sudo cgps -s
+     ```
+   - This will display the GPS data, including latitude and longitude.
+
+**Conclusion**:
+The Raspberry Pi can interface with GPS modules, making it capable of providing accurate location information for IoT and tracking applications.
+
+---
+
+These detailed expansions provide a thorough guide for each practical, helping you
+
+ fully understand and document them for your exam. Let me know if you need any further information!
