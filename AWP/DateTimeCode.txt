@@ -1,0 +1,46 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Current Date and Time
+        DateTime now = DateTime.Now;
+        Console.WriteLine("Current Date and Time: " + now);
+
+        // Display individual components of the DateTime
+        Console.WriteLine("Year: " + now.Year);
+        Console.WriteLine("Month: " + now.Month);
+        Console.WriteLine("Day: " + now.Day);
+        Console.WriteLine("Hour: " + now.Hour);
+        Console.WriteLine("Minute: " + now.Minute);
+        Console.WriteLine("Second: " + now.Second);
+
+        // Display only the date or only the time
+        Console.WriteLine("Date Only: " + now.Date.ToShortDateString());
+        Console.WriteLine("Time Only: " + now.TimeOfDay);
+
+        // Using DateTime Methods
+        DateTime futureDate = now.AddDays(5);
+        Console.WriteLine("Date 5 days from now: " + futureDate.ToShortDateString());
+
+        DateTime pastDate = now.AddMonths(-1);
+        Console.WriteLine("Date 1 month ago: " + pastDate.ToShortDateString());
+
+        // Display the day of the week and the day of the year
+        Console.WriteLine("Day of the Week: " + now.DayOfWeek);
+        Console.WriteLine("Day of the Year: " + now.DayOfYear);
+
+        // Creating a specific date
+        DateTime specificDate = new DateTime(2023, 10, 18);
+        Console.WriteLine("Specific Date: " + specificDate.ToLongDateString());
+
+        // Formatting DateTime
+        Console.WriteLine("Formatted Date: " + now.ToString("MMMM dd, yyyy"));
+        Console.WriteLine("Formatted Time: " + now.ToString("hh:mm tt"));
+
+        // Wait for user input to close the console
+        Console.WriteLine("\nPress any key to exit...");
+        Console.ReadKey();
+    }
+}

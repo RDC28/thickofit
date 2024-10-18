@@ -1,0 +1,35 @@
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true">
+</asp:GridView>
+
+
+<<<<<<<<<<<<<<<< codebehind >>>>>>>>>>>>>>>
+
+using System;
+using System.Data;
+
+public partial class Default : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            // Create a DataTable to hold the data
+            DataTable table = new DataTable();
+            
+            // Define the columns
+            table.Columns.Add("ID", typeof(int));
+            table.Columns.Add("Name", typeof(string));
+            table.Columns.Add("Age", typeof(int));
+
+            // Add rows with random data
+            table.Rows.Add(1, "John Doe", 25);
+            table.Rows.Add(2, "Jane Smith", 30);
+            table.Rows.Add(3, "Alice Johnson", 28);
+            table.Rows.Add(4, "Bob Brown", 32);
+
+            // Bind the DataTable to the GridView
+            GridView1.DataSource = table;
+            GridView1.DataBind();
+        }
+    }
+}
