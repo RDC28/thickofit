@@ -1,0 +1,51 @@
+### **QGIS Practical – College, Restaurant, and Hospital Map**
+
+#### **Part 1: Create Layers and Add Features**
+
+1. **Create a New QGIS Project** and save it with a suitable name (e.g., "CityMap").
+
+2. **Create Point Vector Layer**  
+   - Go to **Layer > Create Layer > New Shapefile Layer**  
+   - Add a **point layer** with attribute `type` (to specify "college", "restaurant", or "hospital")  
+   - Add points for:
+     - 1 College  
+     - Multiple Restaurants  
+     - Multiple Hospitals  
+
+3. **Add Roads and Railway Tracks**  
+   - Create **line layers** for:  
+     - Roads  
+     - Railway Tracks  
+
+4. **Add Features**  
+   - Use **Toggle Editing → Add Feature Tool** to place all points and lines on the map.
+
+5. **Differentiate Restaurants**  
+   - Use **Layer Properties > Symbology**  
+     - Change **color and size** of restaurant points to show categories/types.
+
+---
+
+#### **Part 2: Create a Map Layout**
+
+1. **Go to Project > New Print Layout**  
+   - Give it a name like "City Layout"
+
+2. **Add Map View**  
+   - Click **Add Map**, drag to place the map
+
+3. **Add Labels**  
+   - Use **Layer Properties > Labels** to show names (e.g., restaurant name, hospital name)
+
+4. **Add Legend**  
+   - Layout → **Add Legend**
+
+5. **Add Scale**  
+   - Layout → **Add Scale Bar**
+
+6. **Add Title**  
+   - Layout → **Add Label**  
+   - Type a title (e.g., “City Services Map”) and format using fonts and styles
+
+7. **Export Map**  
+   - Layout → **Export as Image** or **PDF**

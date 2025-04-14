@@ -1,0 +1,59 @@
+✅ QUERY 1: Show all the farms that contain wells
+🪜 Step-by-Step:
+Go to the top menu
+look through the icons on top
+Click "Select by Location"
+
+Fill in the dialog:
+
+Select features from: Farms
+Where the feature: contains
+by comparing the features in: Wells
+
+Click Run
+
+🎉 QGIS will highlight (select) all farms that have wells inside them.
+
+✅ QUERY 2: Calculate area of each farm and show the largest farm
+🪜 Step-by-Step:
+
+Look for the layers tab in the left side
+
+Open the Farms layer attribute table by:
+Right-click the Farms layer → Open Attribute Table
+
+Click the Field Calculator (abacus icon at the top)
+
+Set up the field:
+
+Check ✅ “Create a new field”
+
+Name it: Farm_Area
+
+Field type: Decimal (real)
+
+in Expression box type this: area($geometry)
+(This calculates area in layer’s current units, like m² or degrees)
+
+Click OK. Now each farm has an area.
+
+To find the largest:
+
+Click on the Farm_Area column header to sort it in descending order
+
+The top one is the largest farm
+
+✅ QUERY 3: Show all the paths that intersect with highways
+
+Go to the top menu
+look through the icons on top
+Click "Select by Location"
+
+Fill it in:
+
+Select features from: Paths
+Where the feature: intersects
+comparing Features in: Highways
+Click Run
+
+🎯 All paths that touch/cross the highway will be selected.

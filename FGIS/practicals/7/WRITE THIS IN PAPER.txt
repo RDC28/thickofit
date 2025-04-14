@@ -1,0 +1,30 @@
+### QGIS Practical: "Mumbai Map" Creation
+
+1. **Set the Map's CRS and Scale**:
+   - **CRS**: Set the Coordinate Reference System (CRS) to **WGS 84**. This is the common CRS used for global mapping.
+   - **Scale**: Set the map scale to **1:40,000**. This will determine the level of zoom and the representation of distances on the map.
+
+2. **Add Map Elements**:
+   - **Legend**: Insert a **legend** that will describe the symbols and colors used in your map layers.
+   - **Scale Bar**: Add a **scale bar** to provide a visual representation of distances on the map at the set scale.
+
+3. **Set Map Properties**:
+   - Go to **Project** > **Properties** and adjust the settings to ensure that the map layout fits your needs. Set a proper background, margins, and text styles to make the map visually appealing and informative.
+
+4. **Map Title**:
+   - Name your map appropriately, for example: **"Mumbai City Map"**. This will help in clearly identifying the content of the map when printed or viewed.
+
+5. **Import CSV File**:
+   - Import your **CSV file** containing data that you want to visualize on the map. Ensure the CSV file has appropriate columns for geometry (e.g., latitude and longitude) and other attributes.
+   - Go to **Layer** > **Add Layer** > **Add Delimited Text Layer**. Choose your CSV file and define the geometry (latitude, longitude) to plot points on the map.
+
+6. **Specify Layer Name and Geometry CRS**:
+   - Once the CSV file is imported, specify the **layer name** and ensure that the geometry is set to the same CRS (WGS 84) for consistency in your map.
+
+7. **Install and Enable Plugins**:
+   - Go to **Plugins** > **Manage and Install Plugins**.
+   - Search for and enable any **experimental plugins** that might help you in the visualization or analysis of your map. For example, plugins for advanced spatial analysis or visualization can enhance the map's functionality.
+
+8. **Final Adjustments**:
+   - Review all map elements (layers, scale, legend, etc.) and ensure everything is properly aligned and visible.
+   - Save the map project and export it as a printable or shareable format, such as PNG or PDF.

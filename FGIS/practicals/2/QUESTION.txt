@@ -1,0 +1,16 @@
+Create a map of your own residential area
+Add 4 Area (id, name)
+Add 4 Garden (id, name)
+Add 2 Highways (id, name)
+Add 2 railway track (id, name, line)
+Add 5 Railway stations (id, name, line)
+Add 5 Restaurants (id, name)	[At least 2 should be inside any garden]
+Add 5 Hospitals
+Add 10 Building / residential compound / Business.
+
+Create a Map using above layers Add the following
+Add a North Pointer
+Add Legend and Scale
+Use "any "Symbol to indicate hospitals.
+Use a symbol indicating Metro station for one of the railway stations.
+Save your map in JPEG format with 1500 dpi of resolution.

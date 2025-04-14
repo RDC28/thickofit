@@ -1,0 +1,47 @@
+### QGIS Practical: **Road Map Creation and Custom Vector Layer**
+
+1. **Create the Road Map**:
+   - **Add Google Map Layer**:
+     - Install the **OpenLayers plugin** or **QuickMapServices plugin** in QGIS. These plugins allow you to access basemaps, including Google Maps.
+     - Go to **Plugins** > **Manage and Install Plugins**, search for **QuickMapServices**, and enable it.
+     - Once enabled, go to **Web** > **QuickMapServices** and select **Google Maps** (Google Satellite or Google Streets).
+     - Add the **Google Map** layer to your project, which will serve as the background basemap for your road map.
+
+2. **Add Vector Layer from Vashi to Thane Route**:
+   - **Import Route Data**: You can either:
+     - Download a shapefile or KML of the **Vashi to Thane route** from a source like OpenStreetMap or other transportation datasets.
+     - If you have a **CSV file** containing coordinates for the Vashi to Thane route, import it as a **point layer** and convert it into a **line layer** using the **Points to Path** tool (found under **Processing Toolbox**).
+   - **Add the Vector Layer**:
+     - If you already have the vector data for the road (shapefile or KML), simply go to **Layer** > **Add Layer** > **Add Vector Layer** and select the file.
+     - Ensure the route is clearly displayed on the map, with a suitable line style (e.g., solid line or dashed line) to differentiate it from other features.
+
+3. **Dataset Addition to the Layer**:
+   - You can add additional attributes to the **Vashi to Thane route layer** (e.g., route name, distance, or travel time) by opening the **Attribute Table** and editing the data.
+   - If you need additional information, you can use **Google Maps API** or similar services to gather more data about the route, or manually input additional data into the layer.
+
+4. **Create Custom Vector Layer for Residential Area**:
+   - **Create a New Shapefile**:
+     - To create a custom vector layer, go to **Layer** > **Create Layer** > **New Shapefile Layer**.
+     - Choose the appropriate geometry type (e.g., polygon for buildings, hospitals, and temples) and define the CRS (WGS 84).
+   - **Draw Your Residential Area**:
+     - Use the **Edit** tool to draw the boundaries of your **residential area** on the map. This could include residential blocks, streets, or any other features.
+     - Make sure to save your edits once you're done.
+
+5. **Highlight Buildings, Hospitals, and Temples**:
+   - **Add Attributes**:
+     - Open the **Attribute Table** for your residential area layer and create new fields to categorize the buildings, hospitals, and temples.
+     - Use the **Field Calculator** to fill in attributes such as **Type** (Building, Hospital, Temple) for each feature you create.
+   - **Format Features**:
+     - To highlight the features (buildings, hospitals, temples), use the **Layer Styling** panel to assign different colors, symbols, or labels.
+     - For example:
+       - Use a **blue symbol** for buildings, a **red symbol** for hospitals, and a **yellow symbol** for temples.
+       - Customize the size and transparency of the symbols to make them stand out.
+     - Apply **different line styles** if needed for different types of features (e.g., dashed lines for roads and solid for boundaries).
+
+6. **Final Adjustments**:
+   - **Adjust the Symbology**:
+     - Ensure that all features are easily distinguishable, and the labels are clear.
+     - Adjust the map's zoom level to focus on the relevant area, and ensure all important features are visible.
+
+7. **Save and Export**:
+   - Once all the layers and features are created, save your project and export the map if needed (e.g., as a PNG or PDF for printing or sharing).

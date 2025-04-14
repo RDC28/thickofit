@@ -1,0 +1,59 @@
+### **QGIS Practical – Railway Route Map (CST to Chembur)**
+
+#### **Part 1: Create Layers**
+
+1. **Open QGIS** and create a new project (e.g., "RailwayRouteMap").
+
+2. **Create Vector Layers** using **Layer → Create Layer → New Shapefile Layer**:
+
+   - **Line Layers**:  
+     - Railway Route (CST to Chembur)  
+     - Adjacent Roads to Railway  
+     - Railway Tracks  
+
+   - **Polygon Layers**:  
+     - Buildings Adjacent to Railway  
+     - Railway Stations (CST, Chembur, etc.)  
+
+   - **Point Layers**:  
+     - Railway Stations (CST, Chembur, and others in between)  
+     - Bus Stops near stations  
+
+3. **Add Features** using **Toggle Editing → Add Feature Tool** for each of the above layers.
+
+---
+
+#### **Part 2: Style and Customize Map**
+
+4. **Styling the Layers**  
+   - Use **Layer Properties > Symbology** to:
+     - Style the railway track with a line symbol  
+     - Buildings adjacent to the railway can be styled with polygons  
+     - Stations can be marked with point symbols (e.g., a station icon)
+
+5. **Add Labels to Stations**  
+   - Use **Layer Properties > Labels** to show names of stations along the route.
+
+---
+
+#### **Part 3: Map Layout**
+
+6. **Create Print Layout**  
+   - Go to **Project → New Print Layout** and give it a name (e.g., "Railway Route Layout").
+
+7. **Add Map to Layout**  
+   - Click **Add Map** and drag to define the map area.
+
+8. **Add Map Elements**  
+   - Add **North Arrow**  
+   - Add **Legend**  
+   - Add **Scale Bar**  
+   - Add **Title** (e.g., "Railway Route: CST to Chembur")
+
+---
+
+#### **Part 4: Export Map**
+
+9. **Export the Map**  
+   - Go to **Layout → Export as Image**  
+   - Choose **JPEG/PDF** format and save your map.

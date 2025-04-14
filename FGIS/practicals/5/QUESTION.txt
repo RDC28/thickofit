@@ -1,0 +1,7 @@
+Create vector data. (add minimum 5 layers) 
+Line 
+Polygon
+Add point object
+Prepare appropriate database.
+
+Demonstrate the use of analytical tools distance matrix, points in layer.

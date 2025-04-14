@@ -1,0 +1,2 @@
+Create a Road map and add vector layer from Vashi to thane route. Use google map and add dataset to the layer.
+Create vector layer of your own residential area and highlighted buildings, hospitals, and temple with the formatting.

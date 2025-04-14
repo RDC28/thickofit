@@ -1,0 +1,17 @@
+Create a map of your own residential area
+Add 4 Area (id, name)
+Add 4 Garden (id, name)
+Add 2 Highways (id, name)
+Add 2 railway track (id, name, line)
+Add 5 Railway stations( id, name, line)
+Add 5 Restaurants (id, name)	[At least 2 should be inside any garden]
+Add 5 Hospitals
+Add 10 Building / residential compound / Business Park.
+
+
+Perform the following queries on above layers
+Add a new column Garden_area and calculate the area of each garden
+Show the largest garden.
+Show all the railway tracks that intersect with Highways.
+Find all the restaurants inside a garden.
+Find all the railway tracks that do not intersects with highway

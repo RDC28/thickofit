@@ -1,0 +1,16 @@
+Create a map based on following assumptions
+Add 1 Highways (id= "375" )
+Add 6 Farms (id, own_name) (2 farms near Highway)
+Add 4 narrow Paths between farms (id)
+Add a main road that passes near farms and touches the highway.
+Add 2 Farm houses in any two farms ( id, frm_id).
+Add 4 Residential areas. (at-least one near farm and one near main road)
+Add two Primary Schools
+Add a Bus stop and an Auto Stand near a main road.
+Add a Grampanchayat office
+Add 4 wells (3 in farms and 1 in residential area)
+
+Perform the following queries on above layers
+Show all the farms that contains well.
+Calculate area of each farm and Show the largest farm.
+Show all the paths that intersect with Highways.

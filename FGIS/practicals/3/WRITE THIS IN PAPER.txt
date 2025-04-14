@@ -1,0 +1,53 @@
+### **QGIS Practical – Farm and Village Map**
+
+#### **Part 1: Map Creation**
+
+1. **Create a New QGIS Project** and save it with a name like “FarmVillageMap”.
+
+2. **Create Vector Layers** using **Layer > Create Layer > New Shapefile Layer**:
+
+- **Line Layers**:  
+  - Highway (`id`) – Add 1 highway with id = "375"  
+  - Paths (`id`) – Add 4 narrow paths  
+  - Main Road – Add one road near farms that touches the highway
+
+- **Polygon Layers**:  
+  - Farms (`id`, `own_name`) – Add 6 farms (2 near the highway)  
+  - Residential Areas – Add 4 areas (at least one near a farm and one near the main road)
+
+- **Point Layers**:  
+  - Farm Houses (`id`, `frm_id`) – Add 2 in any two farms  
+  - Primary Schools – Add 2  
+  - Bus Stop and Auto Stand – Add both near the main road  
+  - Grampanchayat Office – Add 1  
+  - Wells – Add 4 (3 in farms and 1 in residential area)
+
+3. **Add Features**  
+   - Use **Toggle Editing → Add Feature Tool** to draw and input all the above elements.
+
+4. **Customize Symbols**  
+   - Use different icons for schools, wells, and farm houses using **Layer Properties > Symbology**.
+
+---
+
+#### **Part 2: Perform Queries**
+
+1. **Show Farms that Contain Wells**  
+   - Use **Select by Location**:  
+     - Layer → Select by Location  
+     - Target layer: **Farms**  
+     - Source layer: **Wells**  
+     - Predicate: **"Farms that contain Wells"**
+
+2. **Calculate Area of Each Farm**  
+   - Open **Farms Attribute Table**  
+   - Click **Field Calculator**:  
+     - Create new field: `area`  
+     - Expression: `$area`  
+   - Click OK → Sort by area in descending order to find the largest farm.
+
+3. **Show Paths that Intersect Highway**  
+   - Use **Select by Location**:  
+     - Target layer: **Paths**  
+     - Source layer: **Highway**  
+     - Predicate: **"intersects"**

@@ -1,0 +1,35 @@
+### **QGIS Practical – Vector Data and Analytical Tools**
+
+#### **Part 1: Create Vector Data (Minimum 5 Layers)**
+
+1. **Open QGIS** and create a new project.
+
+2. **Create Vector Layers** using  
+   **Layer → Create Layer → New Shapefile Layer**
+
+   - **Line Layer** – e.g., Roads  
+   - **Line Layer** – e.g., Railway Tracks  
+   - **Polygon Layer** – e.g., Residential Area  
+   - **Polygon Layer** – e.g., Parks  
+   - **Point Layer** – e.g., Schools or Hospitals  
+
+3. **Add Features** using  
+   **Toggle Editing → Add Feature Tool** for each layer.
+
+4. **Prepare Database**  
+   - While creating each layer, add attributes like `id`, `name`, `type`, etc.  
+   - Store features properly by saving edits and layer files.
+
+#### **Part 2: Use Analytical Tools**
+
+1. **Distance Matrix**  
+   - Go to **Processing Toolbox → Distance Matrix**  
+   - Select input layers (e.g., hospitals to schools)  
+   - Choose output location  
+   - It calculates distance between each point in two layers
+
+2. **Points in Layer Tool**  
+   - Go to **Vector → Analysis Tools → Count Points in Polygon**  
+   - Input: Polygon layer (e.g., parks)  
+   - Point layer: (e.g., trees, restaurants)  
+   - It tells how many points fall inside each polygon

@@ -1,0 +1,5 @@
+Create a 3-vector layer to store points representing locations: college, restaurant, hospitals.
+Add roads and railway tracks.
+Change the color and size of point markers on vector layer to visually differentiate between categories of restaurants.
+
+Create a map from above layers: add label, legend, scale, add a suitable title with proper formatting.

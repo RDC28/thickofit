@@ -1,0 +1,9 @@
+Use “Mumbai Map”:
+Add scale to 40000, CRS-WGS 84
+Add legend
+Add scale Bar
+Set proper suitable properties.
+Give proper name to map 
+Import CSV File 
+Specify layer name and show geometry CRS-WGS 84
+Install and enable plugins (experimental plugins).

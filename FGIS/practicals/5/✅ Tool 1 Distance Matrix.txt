@@ -1,0 +1,53 @@
+✅ Tool 1: Distance Matrix
+This calculates distances from one point layer to another.
+
+Example: Calculate distance from Schools to Hospitals
+Go to Processing → Toolbox
+
+Search for Distance Matrix
+
+Double-click "Distance Matrix"
+
+Fill out the form:
+
+Input point layer: Schools
+
+Target point layer: Hospitals
+
+Output matrix type: Linear (N x 1)
+
+Click Run
+
+✅ You'll get a table showing distance from each school to the nearest hospital
+
+You can export this table as CSV if needed for reports
+
+✅ Tool 2: Points in Layer (Spatial Join)
+This finds how many points (e.g., hospitals or schools) fall within another layer (like buildings or parks).
+
+Example: How many Hospitals are inside Parks
+Go to Vector → Analysis Tools → "Join attributes by location (summary)"
+
+Fill it out:
+
+Input layer: Parks
+
+Join layer: Hospitals
+
+Geometric predicate: Contains
+
+Summaries to calculate: Count
+
+Click Run
+
+✅ It’ll add a new column in the Parks layer showing how many hospitals are inside each park (likely 0, but this is just an example).
+
+✅ Final Output
+At the end, you should have:
+
+5 layers created and saved (line, polygon, point)
+
+Distance Matrix output (CSV or table)
+
+Spatial join results showing point-in-polygon analysis
+

@@ -1,0 +1,64 @@
+### QGIS Practical: **Residential Area Map Creation and Queries**
+
+#### 1. **Create a Map of Your Residential Area**:
+   - **Create a New Shapefile** for your residential area:
+     - Go to **Layer** > **Create Layer** > **New Shapefile Layer**.
+     - Choose the appropriate geometry type (e.g., **Polygon** for areas, **Point** for stations and restaurants).
+     - Define the CRS as **WGS 84**.
+     - Create a new field for **ID** and **Name** for each feature.
+
+#### 2. **Add Layers** for Different Features:
+   - **4 Areas**:
+     - Add a new polygon layer and create 4 areas (residential zones, parks, etc.) with IDs and names.
+   - **4 Gardens**:
+     - Create another polygon layer for gardens. Assign each garden an ID and name.
+   - **2 Highways**:
+     - Add a new line layer for highways, assign each a unique ID and name.
+   - **2 Railway Tracks**:
+     - Create a line layer for the railway tracks. Add attributes for **ID**, **Name**, and **Line**.
+   - **5 Railway Stations**:
+     - Create a point layer for railway stations and add the **ID**, **Name**, and **Line** attributes.
+   - **5 Restaurants**:
+     - Create a point layer for restaurants. Make sure at least 2 restaurants are located **inside any garden**. Add **ID** and **Name** attributes.
+   - **5 Hospitals**:
+     - Create a point layer for hospitals, each with a unique ID and name.
+   - **10 Buildings/Residential Compound/Business Park**:
+     - Create a polygon or point layer for buildings, compounds, or business parks, with each having an **ID** and **Name**.
+
+#### 3. **Perform Queries on the Layers**:
+
+##### Query 1: **Add a New Column Garden_Area and Calculate the Area of Each Garden**:
+   - In the **Garden** layer, open the **Attribute Table**.
+   - Click on **Field Calculator** to add a new column **Garden_Area**.
+   - In the field calculator, use the **$area** expression to calculate the area of each garden (ensure the CRS is a projected CRS for accurate area calculation).
+   - Save the new field.
+
+##### Query 2: **Show the Largest Garden**:
+   - Open the **Attribute Table** of the **Garden** layer.
+   - Sort the **Garden_Area** field in descending order.
+   - The first record will represent the largest garden.
+
+##### Query 3: **Show All the Railway Tracks That Intersect with Highways**:
+   - Use the **Select by Location** tool: Go to **Vector** > **Research Tools** > **Select by Location**.
+   - Choose the **Railway Tracks** layer as the target and the **Highways** layer as the reference.
+   - Choose the spatial relationship **intersect** and click **Run**.
+   - The selected railway tracks will be those that intersect with highways.
+
+##### Query 4: **Find All the Restaurants Inside a Garden**:
+   - Use the **Select by Location** tool:
+     - Set the **Restaurants** layer as the target and **Gardens** as the reference layer.
+     - Choose the spatial relationship **within** and click **Run**.
+     - This will select all the restaurants located inside any garden.
+
+##### Query 5: **Find All the Railway Tracks That Do Not Intersect with Highways**:
+   - Use **Select by Location** again:
+     - Select **Railway Tracks** as the target and **Highways** as the reference.
+     - Choose the spatial relationship **do not intersect** and click **Run**.
+     - The selected railway tracks will be those that do not intersect with any highway.
+
+#### 4. **Final Adjustments**:
+   - **Label the Features**: Add labels to each layer (e.g., **Restaurants**, **Hospitals**, **Stations**) for easier identification.
+   - **Styling**: Use distinct colors and symbols to differentiate each feature, such as different colors for gardens, highways, and railway tracks.
+
+#### 5. **Save and Export the Map**:
+   - Save your project and export it in a suitable format (e.g., PNG, PDF) for sharing or printing.

@@ -1,0 +1,68 @@
+🔍 Part 2: Perform Spatial Queries and Analysis
+
+### **1. Add a new column `Garden_area` and calculate the area of each garden**
+
+#### ✅ Steps:
+- Open **Garden** layer’s attribute table (right click on garden layer in the layer menu on the left side of the screen)
+- Click on **Field Calculator** (abacus icon)
+- Create a **new field**:  
+  - Name: `Garden_area`  
+  - Type: Decimal or Float  
+  - type the following thing in the Expression box at the bottom: `area($geometry)` 
+  - Click **OK** to apply
+
+---
+
+### **2. Show the largest garden**
+
+#### ✅ Steps:
+- In the **Garden** layer’s attribute table (right click on garden layer in the layer menu on the left side of the screen):
+  - tap on the 'Area' column header to sort it ascending or descending
+
+---
+
+### **3. Show all the railway tracks that intersect with Highways**
+
+#### ✅ Steps:
+- Use **Vector tab on top	 → Geoprocessing Tools → Intersect**
+  - Input Layer: **Railway Tracks**
+  - Overlay Layer: **Highways**
+  - Output: Save as new layer: `Rail_Highway_Intersect`
+- Open resulting layer to see which railway tracks intersect
+
+Or use **Select by Location**:
+- Layer to select from: **Railway Tracks**
+- Spatial operation: **intersect**
+- With: **Highways**
+- This will highlight the intersecting tracks
+
+---
+
+### **4. Find all the restaurants inside a garden**
+
+#### ✅ Steps:
+- Use **Select by Location**:
+  - Select features from: **Restaurants**
+  - Where the feature: **is within**
+  - Source layer: **Garden**
+- Export selected features to a new layer if needed
+
+---
+
+### **5. Find all railway tracks that do *not* intersect with highway**
+
+#### ✅ Steps:
+Use **Select by Location**, then **invert selection**:
+
+1. Select railway tracks that **intersect** highways (as in step 3)
+2. Go to **Edit → Invert Selection**
+3. You'll now have the railway tracks that **do not** intersect highways
+
+Or use **Expression** (if `Intersected` field was created):
+```sql
+"Intersected" IS NULL
+```
+
+---
+
+Let me know if you’d like the **layer creation steps** or help doing this in **Python (using GeoPandas)** or want screenshots for QGIS.

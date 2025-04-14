@@ -1,0 +1,55 @@
+### QGIS Practical: **Residential Area Map Creation with Features**
+
+#### 1. **Create a Map of Your Residential Area**:
+   - **Set up a new project** in QGIS and define the **Coordinate Reference System (CRS)** as **WGS 84** or any suitable projection.
+   - **Create Layers for Different Features**:
+     - **4 Areas**: Create a polygon layer with fields for **ID** and **Name**.
+     - **4 Gardens**: Create another polygon layer with fields for **ID** and **Name**.
+     - **2 Highways**: Create a line layer with fields for **ID** and **Name**.
+     - **2 Railway Tracks**: Create a line layer with fields for **ID**, **Name**, and **Line**.
+     - **5 Railway Stations**: Create a point layer with fields for **ID**, **Name**, and **Line**.
+     - **5 Restaurants**: Create a point layer with fields for **ID** and **Name** (at least 2 should be inside any garden).
+     - **5 Hospitals**: Create a point layer with fields for **ID** and **Name**.
+     - **10 Buildings/Residential Compounds/Business**: Create a polygon or point layer with fields for **ID** and **Name**.
+
+#### 2. **Add and Format Layers**:
+   - **Gardens**: Create 4 polygons to represent gardens. Make sure each has an **ID** and **Name**.
+   - **Highways**: Add 2 highway lines with suitable names and IDs.
+   - **Railway Tracks**: Add 2 railway track lines with attributes like **ID**, **Name**, and **Line**.
+   - **Railway Stations**: Add 5 points to represent stations, with **ID**, **Name**, and **Line** fields.
+   - **Restaurants**: Add 5 points for restaurants, ensuring that at least 2 are inside the garden polygons. Use **ID** and **Name** attributes.
+   - **Hospitals**: Add 5 points for hospitals with **ID** and **Name** fields.
+   - **Buildings/Residential Compounds**: Add 10 polygons or points for buildings/businesses with appropriate **ID** and **Name** attributes.
+
+#### 3. **Create Map Layout**:
+   - **North Pointer**: 
+     - Go to the **Print Layout** (Project > New Print Layout).
+     - Click the **Add North Arrow** button and place the north pointer on the layout.
+   - **Add Legend**: 
+     - Click the **Add Legend** button and place it on the layout. The legend should display all the features you’ve added, such as gardens, highways, restaurants, hospitals, etc.
+   - **Add Scale Bar**:
+     - Use the **Add Scale Bar** button to add a scale bar to the map layout.
+     - Adjust the scale bar to match the scale of your map (e.g., 1:10,000, 1:20,000).
+   - **Set the Map Title**: 
+     - Add a title like “Residential Area Map” at the top of the layout.
+
+#### 4. **Symbol Customization**:
+   - **Use a Symbol for Hospitals**: 
+     - Select the **Hospital** layer and go to the **Layer Styling Panel**.
+     - Choose an appropriate symbol to represent hospitals (e.g., a red cross or hospital icon).
+   - **Use a Metro Station Symbol for One Railway Station**:
+     - For one of the railway stations, go to the **Layer Styling Panel** and change the symbol to a **Metro Station** icon (you can use any metro or subway icon available or import a custom one).
+
+#### 5. **Save the Map**:
+   - Once all layers are properly added, styled, and arranged in the layout:
+     - Go to **Layout** > **Export as Image**.
+     - Save the map in **JPEG** format with a resolution of **1500 dpi**.
+     - Adjust the export settings to ensure the resolution and quality are suitable.
+
+#### 6. **Final Adjustments**:
+   - Review your map for clarity and readability. Make sure all symbols are distinct and the labels are legible.
+   - Ensure the map title, legend, scale bar, and north pointer are properly placed without overlapping features.
+
+#### 7. **Save Your Project**:
+   - Save your QGIS project in **.qgs** format for future modifications.
+   - Share or print your map in **JPEG format** for presentation.

@@ -1,0 +1,42 @@
+Google Maps: 
+https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}
+/
+/
+/
+/
+
+
+
+🗺️ HOW TO ADD GOOGLE MAPS TO QGIS USING THAT URL
+✅ Step 1: Open QGIS
+Make sure you're using QGIS 3.x version (newer is better)
+
+✅ Step 2: Go to Browser Panel (or Layer → Data Source Manager)
+In QGIS, look at the left side panel
+If you don’t see “Browser,” go to View → Panels → Browser Panel
+
+Scroll down to XYZ Tiles
+
+Right-click XYZ Tiles → New Connection
+
+✅ Step 3: Add New Tile Layer
+Fill out the dialog:
+
+Name: Google Maps (or whatever you like)
+
+URL:
+
+bash
+Copy
+Edit
+https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}
+Leave other settings as default
+
+Click OK
+
+✅ Step 4: Use It as a Basemap
+Now under XYZ Tiles, you’ll see Google Maps
+
+Double-click to load it onto your map canvas
+
+It will behave like a normal basemap — zoom, pan, etc.

@@ -1,0 +1,36 @@
+🔌 HOW TO INSTALL & ENABLE PLUGINS IN QGIS (INCLUDING EXPERIMENTAL ONES)
+✅ Step 1: Open Plugin Manager
+Open QGIS
+
+Go to the top menu:
+Click Plugins → Manage and Install Plugins...
+
+✅ Step 2: Enable Experimental Plugins
+In the Plugin Manager window, click "Settings" (left sidebar)
+
+Tick this checkbox:
+✅ "Show also experimental plugins"
+
+Click OK or Back to All
+
+🔧 Experimental plugins are new or in testing phase, but sometimes offer powerful tools.
+
+✅ Step 3: Install a Plugin
+Go to the "All" or "Not Installed" tab
+
+Search for any plugin name (e.g., QuickMapServices, Distance Matrix, mmqgis, etc.)
+
+Select the plugin
+
+Click Install Plugin
+
+Once installed, it'll appear in the Installed tab and menu/toolbars.
+
+✅ Step 4: Use the Plugin
+After installation, you’ll find it:
+
+In the Plugins menu
+
+Or as a new toolbar icon
+
+Or under Processing Toolbox (if it's an analysis plugin)
