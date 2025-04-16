@@ -1,0 +1,445 @@
+GOAL SEEK AND WHAT IF ANALYSIS
+
+
+
+
+
+
+
+
+
+
+
+Here are clear step-by-step instructions you can write or follow during your practical exam in Excel:
+
+
+---
+
+Practical: Predicting Total and Average Marks in Excel
+
+
+---
+
+Step 1: Enter the Data
+
+1. In Excel, enter the following data:
+
+
+
+
+---
+
+Step 2: Calculate Total and Average
+
+1. Click on cell B5 and enter this formula:
+
+=SUM(B1:B4)
+
+
+2. Click on cell B6 and enter this formula:
+
+=AVERAGE(B1:B4)
+
+
+
+
+---
+
+Step 3: Use What-If Analysis (Data Table)
+
+1. Below your data, type this for testing Subject 4 values:
+
+
+
+2. Select the range A2:B7.
+
+
+3. Go to Data → What-If Analysis → Data Table.
+
+
+4. In the Column input cell, select cell B4 (Subject 4 marks).
+
+
+5. Click OK. Excel will calculate the total marks for each value.
+
+
+
+
+---
+
+Step 4: Use Goal Seek to Achieve Average 80
+
+1. Go to Data → What-If Analysis → Goal Seek.
+
+
+2. Set up like this:
+
+Set cell: B6 (Average Marks)
+
+To value: 80
+
+By changing cell: B4 (Subject 4)
+
+
+
+3. Click OK.
+
+
+
+Excel will find the marks needed in Subject 4 to get an average of 80.
+
+
+--
+
+
+
+
+
+
+
+
+
+
+
+
+PIVOT CHART AND TABLE FOR CUBE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+Practical: Import Cube in Excel & Create Pivot Table and Pivot Chart
+
+> Assumes that a data cube or OLAP cube has been created and is available (from a database or an .odc connection file).
+
+
+
+
+---
+
+Step 1: Open Microsoft Excel
+
+1. Open a new Excel workbook.
+
+
+
+
+---
+
+Step 2: Import the Data Cube
+
+1. Go to the Data tab.
+
+
+2. Click Get Data → From Database → From Analysis Services (if connecting to SQL Server Analysis Services)
+(OR use From Other Sources → From Data Connection Wizard if importing from an .odc file).
+
+
+3. Enter the server name (or browse to select the .odc file).
+
+
+4. Select the cube you want to import.
+
+
+5. Choose the dimensions and measures you want to include.
+
+
+6. Click Finish, then choose where to place the Pivot Table (usually in a new worksheet).
+
+
+
+
+---
+
+Step 3: Create the Pivot Table
+
+1. After importing, the Pivot Table Field List will appear on the right.
+
+
+2. Drag fields into:
+
+Rows: Example – Product, Category, or Subject
+
+Columns: Example – Year or Region
+
+Values: Example – Sales, Marks, or Profit (set to Sum or Average)
+
+Filters: Example – Student Name or Date
+
+
+
+
+
+---
+
+Step 4: Create a Pivot Chart
+
+1. Click anywhere on the Pivot Table.
+
+
+2. Go to Insert tab → Click Pivot Chart.
+
+
+3. Choose a chart type (e.g., Column Chart, Bar Chart, Line Chart, etc.).
+
+
+4. Click OK.
+
+
+
+You now have a visual chart representing your Pivot Table data.
+
+
+---
+
+Let me know if you’d like a sample dataset and steps with screenshots or need this in a Word file for your submission!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SCENARIO MANAGER
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+Practical: What-If Analysis Using Scenario Manager in Excel
+
+
+---
+
+Given Data
+
+
+---
+
+Step 1: Enter the Data in Excel
+
+
+---
+
+Step 2: Use Scenario Manager for What-If Analysis
+
+1. Go to the Data tab → Click on What-If Analysis → Select Scenario Manager.
+
+
+2. In the Scenario Manager dialog, click Add.
+
+
+
+
+---
+
+Create Scenario 1: Best Case
+
+Name: Best Case
+
+Changing cell: B4 (Subject 4)
+
+Click OK.
+
+Input value: 90
+
+Click OK
+
+
+
+---
+
+Create Scenario 2: Expected Case
+
+Name: Expected Case
+
+Changing cell: B4
+
+Input value: 75
+
+Click OK
+
+
+
+---
+
+Create Scenario 3: Worst Case
+
+Name: Worst Case
+
+Changing cell: B4
+
+Input value: 60
+
+Click OK
+
+
+
+---
+
+Step 3: Show and Analyze Each Scenario
+
+In the Scenario Manager dialog, select a scenario and click Show.
+
+Observe how the Total Marks and Average Marks (B5 and B6) change based on Subject 4 value.
+
+
+You can switch between scenarios to analyze the impact.
+
+
+---
+
+(Optional) Step 4: Summary Report
+
+In Scenario Manager, click Summary.
+
+Select:
+
+Result cells: B5 (Total) and B6 (Average)
+
+
+Click OK.
+
+
+This generates a new sheet with a summary table comparing all scenarios.
+
+
+---
+
+Let me know if you'd like this formatted as a Word or PDF document to take to your exam.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PIVOT CHART AND TABLE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+Excel Practical: Student Marks Analysis Using Pivot Table and Pivot Chart
+
+
+---
+
+Step 1: Enter the Data in Excel
+
+
+---
+
+Step 2: Create a Pivot Table
+
+1. Select the data including headers (A1:C13).
+
+
+2. Go to Insert tab → Click PivotTable.
+
+
+3. Choose New Worksheet and click OK.
+
+
+
+
+---
+
+Step 3: Configure the Pivot Table
+
+1. In the Pivot Table Field List:
+
+Drag Subject to Rows.
+
+Drag Marks to Values.
+
+It will default to Sum. Click the dropdown on “Sum of Marks” → Value Field Settings → Select Average → OK.
+
+
+(Optional) Drag Student Name to Filters to check performance by student.
+
+
+
+
+Now, you will see the average marks per subject.
+
+
+---
+
+Step 4: Use Filters to Check Individual Performance
+
+1. Use the Student Name filter dropdown at the top of the Pivot Table.
+
+
+2. Select a student (e.g., “Aarav”) to view only their marks across subjects.
+
+
+
+
+---
+
+Step 5: Create a Pivot Chart
+
+1. Click anywhere inside the Pivot Table.
+
+
+2. Go to Insert tab → Choose PivotChart → Select Column Chart or Bar Chart → Click OK.
+
+
+3. You’ll get a visual comparison of marks across subjects.
+
+
