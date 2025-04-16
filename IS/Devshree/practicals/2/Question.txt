@@ -1,0 +1,71 @@
+Q2.  Configure OSPF MD5 authentication  Configure a local user account on R1 and configure authenticate on the console and vty lines using local AAA.  Verify local AAA authentication from the R1 console and the PC0 client and PC1 Client.
+
+🌐 Network Topology Setup
+🖥️ PC0 Configuration:
+1.	Go to Desktop > IP Configuration
+2.	Set IP Address: 192.168.1.2
+3.	Set Subnet Mask: 255.255.255.0
+4.	Set Default Gateway: 192.168.1.1
+🖥️ PC1 Configuration:
+1.	Go to Desktop > IP Configuration
+2.	Set IP Address: 192.168.1.3
+3.	Set Subnet Mask: 255.255.255.0
+4.	Set Default Gateway: 192.168.1.1
+📡 Router R1 Configuration (Interface):
+1.	Go to CLI mode
+2.	Enter global config mode: conf t
+3.	Configure Interface:
+o	interface gig0/0
+o	ip address 192.168.1.1 255.255.255.0
+o	no shutdown
+4.	✅ Save configuration: exit → wr
+
+🔐 OSPF MD5 Authentication Configuration
+🧾 Objective: Secure OSPF using MD5 authentication.
+🔧 Steps:
+1.	Enable OSPF:
+o	router ospf 1
+o	network 192.168.1.0 0.0.0.255 area 0
+2.	Enable MD5 authentication on the interface:
+o	Go to interface gig0/0
+o	Enable MD5:
+	ip ospf message-digest-key 1 md5 cisco
+	ip ospf authentication message-digest
+3.	✅ Save configuration: exit → wr
+
+👤 Local AAA User Authentication Configuration
+🎯 Objective: Use a local user account for console and VTY line access.
+🔧 Steps:
+1.	Create a local user account:
+o	username Devshree privilege 15 secret Solanki
+2.	Enable AAA:
+o	aaa new-model
+3.	Configure console line authentication:
+o	line console 0
+o	login local
+o	exit
+4.	Configure VTY line authentication:
+o	line vty 0 4
+o	login local
+o	exit
+5.	Set Enable password for AAA:
+o	enable secret 123
+6.	✅ Save configuration: exit → wr
+
+🧪 Verification of Local AAA Authentication
+🖥️ From Router Console (R1):
+•	When reconnecting via console, router should prompt for username and password.
+•	Enter:
+o	Username: Devshree
+o	Password: Solanki
+•	✅ Successful login confirms AAA on console working.
+🖥️ From PC0 and PC1 via Telnet:
+1.	Open Desktop > Terminal or use Telnet from Command Prompt.
+2.	Type: telnet 192.168.1.1
+3.	Enter credentials:
+o	Username: Devshree
+o	Password: Solanki
+4.	✅ Access should be granted.
+📝 Note: Make sure Telnet is enabled on the router if testing from PC:
+•	line vty 0 4
+•	transport input telnet

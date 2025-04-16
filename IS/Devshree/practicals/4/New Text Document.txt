@@ -1,0 +1,72 @@
+Q4. Create the following topology using static routing 
+1. Configure the extended ACL 
+2. Verify the extended ACL implementation. 
+
+Step-by-Step CLI Commands for Full Configuration
+PC0 Configuration (Click PC0 > Desktop > IP Configuration)
+IP Address: 10.101.117.51 
+Subnet Mask: 255.255.255.248 
+Default Gateway: 10.101.117.49 
+PC1 Configuration (Click PC1 > Desktop > IP Configuration)
+IP Address: 10.101.117.35 
+Subnet Mask: 255.255.255.240 
+Default Gateway: 10.101.117.33 
+SWA Configuration
+enable
+configure terminal
+interface vlan 1
+ip address 10.101.117.50 255.255.255.248
+no shutdown
+exit
+ip default-gateway 10.101.117.49
+end
+SWB Configuration
+enable
+configure terminal
+interface vlan 1
+ip address 10.101.117.34 255.255.255.240
+no shutdown
+exit
+ip default-gateway 10.101.117.33
+end
+SWC Configuration
+enable
+configure terminal
+interface vlan 1
+ip address 10.101.117.2 255.255.255.224
+no shutdown
+exit
+ip default-gateway 10.101.117.1
+end
+Router RTA Configuration
+enable
+configure terminal
+interface g0/0
+ip address 10.101.117.49 255.255.255.248
+no shutdown
+exit
+interface g0/1
+ip address 10.101.117.33 255.255.255.240
+no shutdown
+exit
+interface g0/2
+ip address 10.101.117.1 255.255.255.224
+no shutdown
+exit
+! Optional static routes (not needed but for exam)
+ip route 10.101.117.48 255.255.255.248 g0/0
+ip route 10.101.117.32 255.255.255.240 g0/1
+ip route 10.101.117.0 255.255.255.224 g0/2
+! ACL Configuration
+access-list 100 permit icmp host 10.101.117.51 host 10.101.117.35
+access-list 100 deny ip any any
+! Apply ACL on g0/0 (inbound)
+interface g0/0
+ip access-group 100 in
+exit
+end
+Verification Commands
+ping 10.101.117.35 ← from PC0 ✅ should work
+ping 10.101.117.51 ← from PC1 ❌ should fail
+show access-lists
+show running-config

@@ -1,0 +1,58 @@
+Create the following topology and 
+ Configure an ACL that will permit FTP and HTTP access on R1. 
+ Verify the ACL implementation. PC1 (Only FTP). PC2(Only HTTP)
+
+
+🔧 Network Topology Configuration Steps
+🖥️ PC1 Configuration:
+1.	Open Desktop > IP Configuration
+2.	Set IP Address: 172.22.34.66
+3.	Subnet Mask: 255.255.255.224
+4.	Default Gateway: 172.22.34.65
+🖥️ PC2 Configuration:
+1.	Open Desktop > IP Configuration
+2.	Set IP Address: 172.22.34.98
+3.	Subnet Mask: 255.255.255.240
+4.	Default Gateway: 172.22.34.97
+🖥️ Server Configuration:
+1.	Open Desktop > IP Configuration
+2.	Set IP Address: 172.22.34.62
+3.	Subnet Mask: 255.255.255.192
+4.	Default Gateway: 172.22.34.1
+5.	Enable both FTP and HTTP services from Services tab
+📡 Router R1 Interface Configuration:
+1.	Go to CLI mode
+2.	Enter global configuration mode: conf t
+3.	Configure Interfaces:
+o	interface gig0/0
+	ip address 172.22.34.65 255.255.255.224
+	no shutdown
+o	interface gig0/1
+	ip address 172.22.34.97 255.255.255.240
+	no shutdown
+o	interface gig0/2
+	ip address 172.22.34.1 255.255.255.192
+	no shutdown
+✅ Save configuration: exit → wr
+🔒 ACL Configuration on R1
+🎯 Objective:
+•	PC1 should have access to FTP (port 21) only
+•	PC2 should have access to HTTP (port 80) only
+🔧 Steps to Configure ACL:
+1.	Go to CLI mode → conf t
+2.	Create ACL:
+o	access-list 100 permit tcp 172.22.34.66 0.0.0.0 any eq ftp
+o	access-list 100 permit tcp 172.22.34.98 0.0.0.0 any eq www
+o	access-list 100 deny ip any any
+3.	Apply ACL to outgoing interface towards the server:
+o	interface gig0/2
+o	ip access-group 100 out
+✅ Save configuration: exit → wr
+🧪 Verification Steps
+🖥️ From PC1:
+•	Open web browser → Enter Server IP → ❌ Should not open HTTP
+•	Use FTP client → Connect to Server IP → ✅ FTP should work
+🖥️ From PC2:
+•	Open web browser → Enter Server IP → ✅ HTTP should work
+•	Use FTP client → Connect to Server IP → ❌ Should be blocked
+ 
