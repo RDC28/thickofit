@@ -1,0 +1,1367 @@
+Sure! Here's a clear and organized version you can write on paper for your practical submission:
+
+
+---
+
+PRACTICAL – INTRODUCTION TO ANDROID DEVELOPMENT
+
+
+---
+
+Aim:
+To study the basics of Android, Android Studio IDE, and create a simple “Hello World” Android application.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Android Virtual Device (AVD) or Android Phone with USB Debugging enabled
+
+
+
+---
+
+Steps:
+
+1. Introduction to Android & Android Studio IDE
+
+Android is an open-source mobile operating system developed by Google.
+
+Android Studio is the official IDE for Android development. It supports Java, Kotlin, and XML.
+
+
+2. Application Fundamentals
+
+Android Components:
+
+Activities: Entry point for user interaction.
+
+Services: Run in the background.
+
+Content Providers: Manage data sharing.
+
+Broadcast Receivers: Respond to broadcast messages.
+
+
+Interface Overview: Android Studio includes code editor, layout editor, logcat, and more.
+
+
+3. Creating a New Project in Android Studio
+
+Open Android Studio → Click on "New Project".
+
+Choose Empty Activity → Click Next.
+
+Enter the Project Name (e.g., HelloWorld).
+
+Choose Language (Java/Kotlin) → Finish.
+
+
+4. Creating Android Virtual Device (AVD)
+
+Go to Tools > Device Manager.
+
+Click on Create Virtual Device.
+
+Choose a device model (e.g., Pixel 4) → Click Next.
+
+Select a system image → Click Next.
+
+Click Finish to create the AVD.
+
+
+5. Enabling USB Debugging Mode (for physical device)
+
+Go to Settings > About Phone > Tap Build Number 7 times.
+
+Go back → Open Developer Options.
+
+Enable USB Debugging.
+
+
+6. Android Application Overview
+
+MainActivity.java / MainActivity.kt contains the activity code.
+
+activity_main.xml contains the UI layout.
+
+
+7. Creating a Simple “Hello World” Program
+
+In activity_main.xml, use the following code:
+
+
+<TextView  
+    android:layout_width="wrap_content"  
+    android:layout_height="wrap_content"  
+    android:text="Hello World!"  
+    android:layout_gravity="center" />
+
+In MainActivity.java / MainActivity.kt, default code is usually sufficient.
+
+
+8. Running the Application
+
+Click Run (green play button).
+
+Choose an emulator or connected device.
+
+Output will display "Hello World!" on the screen.
+
+
+
+---
+
+Conclusion:
+Successfully created and executed a simple Android application displaying “Hello World” using Android Studio.
+
+
+---
+
+Let me know if you want a diagram or screenshots added to your printout.
+
+
+
+
+Sure! Here's the neatly written version for your second practical:
+
+
+---
+
+PRACTICAL – ANDROID PROGRAMMING RESOURCES
+
+
+---
+
+Aim:
+To understand and implement various Android programming resources like Color, Theme, String, Drawable, Dimension, and Image.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Android Emulator or Android Device
+
+
+
+---
+
+Steps:
+
+1. Introduction to Android Resources
+Android resources allow developers to separate content (like strings, colors, images) from the app logic, promoting reusability and localization.
+
+
+---
+
+2. Types of Android Resources and Their Usage:
+
+a) String Resource
+
+Define in res/values/strings.xml:
+
+
+<string name="welcome_msg">Welcome to Android!</string>
+
+Use in XML or code:
+android:text="@string/welcome_msg"
+
+
+b) Color Resource
+
+Define in res/values/colors.xml:
+
+
+<color name="primaryColor">#2196F3</color>
+
+Use in XML:
+android:background="@color/primaryColor"
+
+
+c) Theme Resource
+
+Define in res/values/themes.xml:
+
+Customize colors, styles, fonts, etc.
+
+
+Apply in AndroidManifest.xml:
+
+
+android:theme="@style/Theme.MyApp"
+
+d) Drawable Resource
+
+Used for graphics (XML shapes, bitmaps, selectors)
+
+Stored in res/drawable/
+
+Example: res/drawable/custom_shape.xml
+
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#FF0000"/>
+    <corners android:radius="8dp"/>
+</shape>
+
+e) Dimension Resource
+
+Define in res/values/dimens.xml:
+
+
+<dimen name="padding_standard">16dp</dimen>
+
+Use in XML:
+android:padding="@dimen/padding_standard"
+
+
+f) Image Resource
+
+Add image files in res/drawable/ (e.g., logo.png)
+
+Use in XML:
+
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/logo" />
+
+
+---
+
+3. Running the App Using Resources
+
+Use the resources in your layout XML (activity_main.xml) and run the app to see the results.
+
+Strings, colors, and images should load properly and reflect in the UI.
+
+
+
+---
+
+Conclusion:
+Successfully implemented and understood various Android resources such as string, color, drawable, theme, dimension, and image in an Android application.
+
+
+---
+
+Let me know if you want a sample layout or app that uses all these in one screen.
+
+
+
+
+
+
+
+Sure! Here's a clean and organized version of the third practical for writing on paper:
+
+
+---
+
+PRACTICAL – PROGRAMMING ACTIVITIES AND FRAGMENTS
+
+
+---
+
+Aim:
+To study and implement Activities, Fragments, their life cycles, and create multiple Activities and Fragments in an Android application.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Emulator or Android Device
+
+
+
+---
+
+Steps:
+
+1. Understanding Activities and Fragments
+
+Activity: A single, focused screen the user interacts with.
+
+Fragment: A reusable portion of the UI within an Activity.
+
+
+
+---
+
+2. Activity Life Cycle
+
+Important lifecycle methods:
+
+onCreate() – Called when activity is first created.
+
+onStart() – Activity becomes visible.
+
+onResume() – Activity comes to the foreground.
+
+onPause() – Another activity is coming in front.
+
+onStop() – Activity is no longer visible.
+
+onDestroy() – Activity is finishing or being destroyed.
+
+
+
+Diagram:
+You can draw the official Android Activity Lifecycle diagram from Android docs.
+
+
+---
+
+3. Activity Methods Implementation
+
+Override lifecycle methods in MainActivity.java:
+
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Toast.makeText(this, "onCreate called", Toast.LENGTH_SHORT).show();
+}
+
+
+---
+
+4. Creating Multiple Activities
+
+Create a second Activity (SecondActivity.java) using New > Activity.
+
+Define it in AndroidManifest.xml.
+
+Start it from MainActivity:
+
+
+Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+startActivity(intent);
+
+
+---
+
+5. Fragment Life Cycle
+
+Key methods in Fragment:
+
+onAttach()
+
+onCreate()
+
+onCreateView()
+
+onStart()
+
+onResume()
+
+onPause()
+
+onStop()
+
+onDestroyView()
+
+onDestroy()
+
+onDetach()
+
+
+
+Diagram:
+Draw the Fragment Lifecycle diagram (similar to activity, with additional onCreateView() and onDestroyView() steps).
+
+
+---
+
+6. Creating Multiple Fragments
+
+Create FirstFragment.java and SecondFragment.java
+
+Use FragmentManager to add/replace fragments:
+
+
+getSupportFragmentManager().beginTransaction()
+    .replace(R.id.fragment_container, new FirstFragment())
+    .commit();
+
+To switch fragments:
+
+
+getSupportFragmentManager().beginTransaction()
+    .replace(R.id.fragment_container, new SecondFragment())
+    .addToBackStack(null)
+    .commit();
+
+
+---
+
+Conclusion:
+Successfully understood and implemented Activity lifecycle, multiple Activities, Fragment lifecycle, and multiple Fragments in an Android application.
+
+
+---
+
+Let me know if you'd like me to include basic code for fragment XML layout or how to structure the UI using FrameLayout.
+
+
+
+
+Here’s a neatly written version of your fourth practical for your paper submission:
+
+
+---
+
+PRACTICAL – PROGRAMS RELATED TO DIFFERENT LAYOUTS IN ANDROID
+
+
+---
+
+Aim:
+To understand and implement various Android layouts: Coordinator, Linear, Relative, Table, Absolute, Frame, ListView, and GridView.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Emulator or Android Device
+
+
+
+---
+
+Steps:
+
+1. Linear Layout
+
+Arranges views in a single row or column.
+Code Example (Vertical):
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <TextView android:text="Hello" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <Button android:text="Click" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>
+
+
+---
+
+2. Relative Layout
+
+Positions views relative to each other or parent.
+Code Example:
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <TextView
+        android:id="@+id/label"
+        android:text="Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/label" />
+</RelativeLayout>
+
+
+---
+
+3. Table Layout
+
+Arranges views in rows and columns like a table.
+Code Example:
+
+
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <TableRow>
+        <TextView android:text="Username:" />
+        <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </TableRow>
+</TableLayout>
+
+
+---
+
+4. Frame Layout
+
+Used to display a single view or stack views.
+Code Example:
+
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <ImageView android:src="@drawable/image" android:layout_width="match_parent" android:layout_height="match_parent"/>
+    <TextView android:text="Overlay Text" android:layout_gravity="center"/>
+</FrameLayout>
+
+
+---
+
+5. Absolute Layout (Deprecated)
+
+Places views at absolute positions. Not recommended.
+Code Example:
+
+
+<AbsoluteLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <Button android:layout_x="50dp" android:layout_y="100dp" android:text="Click Me"/>
+</AbsoluteLayout>
+
+
+---
+
+6. Coordinator Layout
+
+Used with Material Design, often for animations and scroll behaviors.
+Code Example:
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_add" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+---
+
+7. ListView
+
+Displays a vertical list of scrollable items.
+Steps:
+
+Create an array of items in Java/Kotlin
+
+Use ArrayAdapter
+Code (Java):
+
+
+ListView listView = findViewById(R.id.listView);
+String[] items = {"Item 1", "Item 2", "Item 3"};
+ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+listView.setAdapter(adapter);
+
+
+---
+
+8. GridView
+
+Displays items in a two-dimensional grid.
+Code:
+
+
+<GridView
+    android:id="@+id/gridView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:numColumns="3"/>
+
+In Java:
+
+String[] items = {"One", "Two", "Three", "Four"};
+GridView grid = findViewById(R.id.gridView);
+ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+grid.setAdapter(adapter);
+
+
+---
+
+Conclusion:
+Successfully implemented and studied various Android layout types including Linear, Relative, Table, Frame, Absolute (deprecated), Coordinator, ListView, and GridView.
+
+
+---
+
+Let me know if you want this in a PDF or want to add a sample screenshot layout.
+
+
+
+
+Here’s the paper-ready write-up for your next practical:
+
+
+---
+
+PRACTICAL – PROGRAMMING UI ELEMENTS IN ANDROID
+(AppBar, Fragments, UI Components)
+
+
+---
+
+Aim:
+To understand and implement UI elements in Android such as AppBar, Fragments, and other common UI components.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Emulator or Android Device
+
+
+
+---
+
+Steps:
+
+1. Implementing AppBar (Toolbar)
+
+AppBar is the top bar in the app used for branding, navigation, and actions.
+Steps:
+
+Use Toolbar in activity_main.xml:
+
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:title="My App"
+    android:titleTextColor="@android:color/white"/>
+
+Set it in MainActivity.java:
+
+
+Toolbar toolbar = findViewById(R.id.toolbar);
+setSupportActionBar(toolbar);
+
+
+---
+
+2. Creating and Using Fragments
+
+Fragments represent a portion of UI in an Activity.
+
+
+Steps:
+
+Create a class FirstFragment.java extending Fragment
+
+Override onCreateView() method to inflate layout
+
+
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_first, container, false);
+}
+
+Load fragment in Activity:
+
+
+getSupportFragmentManager().beginTransaction()
+    .replace(R.id.fragment_container, new FirstFragment())
+    .commit();
+
+Add a <FrameLayout> in activity_main.xml to hold the fragment.
+
+
+
+---
+
+3. Using Common UI Components
+
+Example Layout:
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:text="Enter Name:" />
+    <EditText android:hint="Your name" />
+    <Button android:text="Submit" />
+    <ImageView android:src="@drawable/ic_user" />
+</LinearLayout>
+
+
+---
+
+Conclusion:
+Successfully created an Android UI using AppBar, Fragments, and essential UI components like Buttons, TextViews, EditTexts, and more.
+
+
+---
+
+Let me know if you'd like a simple "Fragment + Toolbar + Button" working example code too!
+
+
+
+
+
+Here’s the paper-ready content for your practical on menus, dialogs, and dialog fragments:
+
+
+---
+
+PRACTICAL – PROGRAMMING MENUS, DIALOGS, AND DIALOG FRAGMENTS IN ANDROID
+
+
+---
+
+Aim:
+To implement and use Menus, Dialogs, and DialogFragments in an Android application.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Emulator or Android Device
+
+
+
+---
+
+Steps:
+
+1. Creating a Menu
+
+Steps:
+
+Create a menu XML in res/menu/menu_main.xml:
+
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_settings" android:title="Settings" />
+    <item android:id="@+id/action_about" android:title="About" />
+</menu>
+
+Inflate menu in MainActivity.java:
+
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_settings) {
+        // Handle settings
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+}
+
+
+---
+
+2. Creating a Simple Dialog
+
+Steps:
+
+Use AlertDialog.Builder to show a dialog:
+
+
+AlertDialog.Builder builder = new AlertDialog.Builder(this);
+builder.setTitle("Confirmation");
+builder.setMessage("Are you sure you want to exit?");
+builder.setPositiveButton("Yes", (dialog, which) -> finish());
+builder.setNegativeButton("No", null);
+builder.show();
+
+
+---
+
+3. Creating a DialogFragment
+
+Steps:
+
+Create a class MyDialogFragment.java:
+
+
+public class MyDialogFragment extends DialogFragment {
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return new AlertDialog.Builder(getActivity())
+            .setTitle("Hello")
+            .setMessage("This is a DialogFragment")
+            .setPositiveButton("OK", (dialog, which) -> dismiss())
+            .create();
+    }
+}
+
+Call it from your Activity:
+
+
+new MyDialogFragment().show(getSupportFragmentManager(), "myDialog");
+
+
+---
+
+Conclusion:
+Successfully implemented menus using XML and Java, showed alert dialogs using AlertDialog.Builder, and used DialogFragment for reusable and lifecycle-aware dialogs.
+
+
+---
+
+Let me know if you'd like code snippets to be printed bigger, with labels like "Output Screenshot" placeholders!
+
+
+
+Here’s your paper-ready version of the practical on Intents, Events, Listeners, and Adapters:
+
+
+---
+
+PRACTICAL – PROGRAMS ON INTENTS, EVENTS, LISTENERS AND ADAPTERS
+(The Android Intent Class, Using Events and Event Listeners)
+
+
+---
+
+Aim:
+To study and implement Intents, Event Handling, Listeners, and Adapters in Android.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Emulator or Android Device
+
+
+
+---
+
+1. Using Android Intents
+
+Intents are used to start another activity or pass data.
+
+Steps:
+
+Create two activities: MainActivity.java and SecondActivity.java
+
+In MainActivity:
+
+
+Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+intent.putExtra("username", "John");
+startActivity(intent);
+
+In SecondActivity:
+
+
+String user = getIntent().getStringExtra("username");
+TextView textView = findViewById(R.id.textView);
+textView.setText("Welcome " + user);
+
+
+---
+
+2. Using Events and Event Listeners
+
+Steps:
+
+Handle button click with an onClickListener:
+
+
+Button btn = findViewById(R.id.myButton);
+btn.setOnClickListener(v -> {
+    Toast.makeText(this, "Button Clicked!", Toast.LENGTH_SHORT).show();
+});
+
+Types of Listeners:
+
+OnClickListener – for button clicks
+
+OnTouchListener – for touch gestures
+
+OnLongClickListener – for long press
+
+
+
+---
+
+3. Using Adapters with ListView
+
+Adapters act as a bridge between UI components and data.
+
+Steps:
+
+In activity_main.xml:
+
+
+<ListView
+    android:id="@+id/listView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+In MainActivity.java:
+
+
+String[] items = {"Apple", "Banana", "Cherry"};
+ListView listView = findViewById(R.id.listView);
+ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+listView.setAdapter(adapter);
+
+Optional: Add OnItemClickListener to ListView:
+
+
+listView.setOnItemClickListener((parent, view, position, id) -> {
+    Toast.makeText(this, "Clicked: " + items[position], Toast.LENGTH_SHORT).show();
+});
+
+
+---
+
+Conclusion:
+Successfully implemented Intent-based navigation, handled user events with listeners, and used Adapters to display data in a ListView.
+
+
+---
+
+Let me know if you'd like this combined with a screenshot section or a flow diagram for Intent flow!
+
+
+
+
+
+
+
+
+Here’s your paper-ready version of the practical on Services, Notifications, and Broadcast Receivers:
+
+
+---
+
+PRACTICAL – PROGRAMS ON SERVICES, NOTIFICATIONS, AND BROADCAST RECEIVERS
+
+
+---
+
+Aim:
+To understand and implement background services, create notifications, and use broadcast receivers in Android.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Emulator or Android Device
+
+
+
+---
+
+1. Creating a Simple Service
+
+Steps:
+
+Create a class MyService.java extending Service:
+
+
+public class MyService extends Service {
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
+        return START_STICKY;
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+}
+
+Register the service in AndroidManifest.xml:
+
+
+<service android:name=".MyService" />
+
+Start the service in MainActivity.java:
+
+
+Intent serviceIntent = new Intent(this, MyService.class);
+startService(serviceIntent);
+
+
+---
+
+2. Creating a Notification
+
+Steps:
+
+Add this code in MainActivity.java:
+
+
+NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
+    .setSmallIcon(R.drawable.ic_launcher_foreground)
+    .setContentTitle("My Notification")
+    .setContentText("Hello! This is a test notification.")
+    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+// Create notification channel for Android 8+
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    NotificationChannel channel = new NotificationChannel("channel_id", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
+    NotificationManager manager = getSystemService(NotificationManager.class);
+    manager.createNotificationChannel(channel);
+}
+
+notificationManager.notify(1, builder.build());
+
+
+---
+
+3. Using a Broadcast Receiver
+
+Steps:
+
+Create a class MyReceiver.java:
+
+
+public class MyReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Toast.makeText(context, "Broadcast Received!", Toast.LENGTH_SHORT).show();
+    }
+}
+
+Register in AndroidManifest.xml:
+
+
+<receiver android:name=".MyReceiver">
+    <intent-filter>
+        <action android:name="com.example.MY_CUSTOM_INTENT" />
+    </intent-filter>
+</receiver>
+
+Send the broadcast in MainActivity.java:
+
+
+Intent intent = new Intent("com.example.MY_CUSTOM_INTENT");
+sendBroadcast(intent);
+
+
+---
+
+Conclusion:
+Successfully implemented a Service, displayed a Notification, and triggered a Broadcast Receiver using a custom broadcast intent.
+
+
+---
+
+Let me know if you want visual diagrams or a multi-page format to print easily!
+
+
+
+
+
+
+
+
+
+Here’s your paper-ready version for the practical on Database Programming with SQLite and Network Communication using JSON:
+
+
+---
+
+PRACTICAL – DATABASE PROGRAMMING WITH SQLITE & NETWORK COMMUNICATION USING JSON
+
+
+---
+
+Part A: Database Programming with SQLite
+
+
+---
+
+Aim:
+To perform data insertion, retrieval, and deletion using SQLite in Android.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Emulator or Android Device
+
+
+
+---
+
+Steps:
+
+1. Create a SQLite Helper Class
+
+public class DBHelper extends SQLiteOpenHelper {
+    public DBHelper(Context context) {
+        super(context, "StudentDB", null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE students(id INTEGER PRIMARY KEY, name TEXT)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS students");
+        onCreate(db);
+    }
+
+    public boolean insertData(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        long result = db.insert("students", null, values);
+        return result != -1;
+    }
+
+    public Cursor getAllData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM students", null);
+    }
+}
+
+2. Use It in Your Activity
+
+DBHelper db = new DBHelper(this);
+db.insertData("John");
+
+Cursor cursor = db.getAllData();
+while (cursor.moveToNext()) {
+    Log.d("SQLite", "ID: " + cursor.getInt(0) + ", Name: " + cursor.getString(1));
+}
+
+
+---
+
+Part B: Programming Network Communication (JSON)
+
+
+---
+
+Aim:
+To fetch and parse JSON data from a remote server in Android.
+
+
+---
+
+Steps:
+
+1. Add Internet Permission
+
+<uses-permission android:name="android.permission.INTERNET" />
+
+2. Use HttpURLConnection to Fetch JSON
+
+new Thread(() -> {
+    try {
+        URL url = new URL("https://jsonplaceholder.typicode.com/users");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        InputStream in = new BufferedInputStream(conn.getInputStream());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        StringBuilder result = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            result.append(line);
+        }
+
+        JSONArray jsonArray = new JSONArray(result.toString());
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject user = jsonArray.getJSONObject(i);
+            Log.d("JSON", "Name: " + user.getString("name"));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}).start();
+
+Note: For production apps, use libraries like Volley or Retrofit.
+
+
+---
+
+Conclusion:
+Successfully performed CRUD operations with SQLite and fetched remote JSON data over the network using HttpURLConnection and JSON parsing.
+
+
+---
+
+Let me know if you'd like an upgraded version using Room database or Retrofit for modern implementations.
+
+
+
+
+
+
+Here’s your paper-ready version of the practical on Threads, Handlers, and Asynchronous Programming in Android:
+
+
+---
+
+PRACTICAL – PROGRAMMING THREADS, HANDLERS AND ASYNCHRONOUS PROGRAMS
+
+
+---
+
+Aim:
+To implement multithreading using Threads, Handlers, and AsyncTask (asynchronous operations) in Android.
+
+
+---
+
+Apparatus/Software Required:
+
+Android Studio IDE
+
+Android SDK
+
+Emulator or Android Device
+
+
+
+---
+
+1. Using Threads in Android
+
+Steps:
+
+Run code in a separate thread to avoid blocking the UI:
+
+
+new Thread(() -> {
+    // Background task
+    for (int i = 0; i <= 5; i++) {
+        Log.d("Thread", "Count: " + i);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}).start();
+
+
+---
+
+2. Using Handlers
+
+Steps:
+
+Handlers are used to update UI from background threads.
+
+
+Handler handler = new Handler(Looper.getMainLooper());
+
+new Thread(() -> {
+    try {
+        Thread.sleep(2000); // Simulate delay
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    handler.post(() -> {
+        Toast.makeText(getApplicationContext(), "Updated from Handler", Toast.LENGTH_SHORT).show();
+    });
+}).start();
+
+
+---
+
+3. Using AsyncTask (deprecated in Android 11+, use for learning)
+
+Steps:
+
+Create a class extending AsyncTask:
+
+
+private class MyAsyncTask extends AsyncTask<Void, Void, String> {
+    @Override
+    protected String doInBackground(Void... voids) {
+        // Background task
+        return "Completed in background";
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+    }
+}
+
+Call it from your activity:
+
+
+new MyAsyncTask().execute();
+
+
+---
+
+Conclusion:
+Successfully implemented background processing using Threads, Handlers, and AsyncTask, which helps maintain smooth UI operations in Android applications.
+
+
+---
+
+Let me know if you want an updated version using Kotlin coroutines or Java Executors for modern apps!
+
+
